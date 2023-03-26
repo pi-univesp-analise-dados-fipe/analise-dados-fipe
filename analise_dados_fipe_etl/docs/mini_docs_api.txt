@@ -1,0 +1,128 @@
+Documentação da API FIPE
+
+1 - Períodos de referência dos dados 
+https://parallelum.com.br/fipe/api/v2/references
+
+Exemplo: 
+{
+    "month": "março/2023"
+    "code": "295",
+}
+
+2 - Marcas por tipo de veículo 
+https://parallelum.com.br/fipe/api/v2/{vehicleType}/brands
+
+vehicleType: Enum:  "cars" "motorcycles" "trucks"
+
+
+3 - Modelos por marca 
+https://parallelum.com.br/fipe/api/v2/{vehicleType}/brands/{brandId}/models
+
+Exemplo:
+https://parallelum.com.br/fipe/api/v2/cars/brands/1/models
+
+Resposta
+[
+  {
+    "code": "1",
+    "name": "Integra GS 1.8"
+  }
+]
+
+4 - Anos por modelo
+https://parallelum.com.br/fipe/api/v2/{vehicleType}/brands/{brandId}/models/{modelId}/years
+
+Exemplo
+https://parallelum.com.br/fipe/api/v2/cars/brands/1/models/1/years
+
+[
+  {
+    "code": "1992-1",
+    "name": "1992 Gasolina"
+  }
+]
+
+
+5 - Dados do veículo por modelo
+https://parallelum.com.br/fipe/api/v2/{vehicleType}/brands/{brandId}/models/{modelId}/years/{yearId}
+
+Exemplo 
+https://parallelum.com.br/fipe/api/v2/cars/brands/1/models/1/years/1992-1
+
+{
+  "vehicleType": 1,
+  "price": "R$ 12.062,00",
+  "brand": "Acura",
+  "model": "Integra GS 1.8",
+  "modelYear": 1992,
+  "fuel": "Gasolina",
+  "codeFipe": "038003-2",
+  "referenceMonth": "março de 2023",
+  "fuelAcronym": "G"
+}
+
+6 - Anos por código FIPE
+
+https://parallelum.com.br/fipe/api/v2/{vehicleType}/{fipeCode}/years
+
+Exemplo
+https://parallelum.com.br/fipe/api/v2/cars/038003-2/years
+[
+  {
+    "code": "1992-1",
+    "name": "1992 Gasolina"
+  }
+]
+
+7 - Dados do veículo por código FIPE 
+https://parallelum.com.br/fipe/api/v2/{vehicleType}/{fipeCode}/years/{yearId}
+
+Exemplo:
+https://parallelum.com.br/fipe/api/v2/cars/038003-2/years/1992-1
+
+
+{
+  "vehicleType": 1,
+  "price": "R$ 12.062,00",
+  "brand": "Acura",
+  "model": "Integra GS 1.8",
+  "modelYear": 1992,
+  "fuel": "Gasolina",
+  "codeFipe": "038003-2",
+  "referenceMonth": "março de 2023",
+  "fuelAcronym": "G"
+}
+
+
+8 - Histórico de preços por Código FIPE
+https://parallelum.com.br/fipe/api/v2/{vehicleType}/{fipeCode}/years/{yearId}/history
+
+Exemplo:
+https://parallelum.com.br/fipe/api/v2/cars/038003-2/years/1992-1/history
+
+{
+  "vehicleType": 1,
+  "brand": "Acura",
+  "model": "Integra GS 1.8",
+  "modelYear": 1992,
+  "fuel": "Gasolina",
+  "codeFipe": "038003-2",
+  "fuelAcronym": "G",
+  "priceHistory": [
+    {
+      "price": "R$ 12.062,00",
+      "month": "março de 2023",
+      "reference": "295"
+    },
+    {
+      "price": "R$ 12.099,00",
+      "month": "fevereiro de 2023",
+      "reference": "294"
+    },
+    {
+      "price": "R$ 12.109,00",
+      "month": "janeiro de 2023",
+      "reference": "293"
+    }
+  ]
+}
