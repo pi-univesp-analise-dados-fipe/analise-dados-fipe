@@ -1,4 +1,5 @@
 import requests
+from tipo_veiculo import TipoVeiculo
 
 url_base_api = "https://parallelum.com.br/fipe/api/v2"
 endpoint_marcas = "brands"
@@ -97,6 +98,7 @@ def get_historico_precos_por_codigo_FIPE(tipo_veiculo, codigo_FIPE, ano):
 
 if __name__ == '__main__':
     # Tipos de veículos: "cars" "motorcycles" "trucks"
+    print(TipoVeiculo.cars.name) #criada Enumeração para apoiar na chamada das funções de acesso à API
     # print(get_periodo_referencia())
     # print(get_marcas_por_tipo("cars"))
     # print(get_modelos_por_marca("cars", "Fiat"))   #retorna dados do modelo
@@ -107,4 +109,6 @@ if __name__ == '__main__':
     # print(get_dados_veiculo_por_modelo("cars", "Fiat", "147 C/ CL","1987-1"))
     # print(get_anos_por_codigo_FIPE("cars", "001124-0"))
     # print(get_dados_veiculo_por_codigo_FIPE("cars", "001124-0", "1987-1"))
-    print(get_historico_precos_por_codigo_FIPE("cars", "001124-0", "1987-1"))
+    #print(get_historico_precos_por_codigo_FIPE("cars", "001124-0", "1987-1"))
+
+
