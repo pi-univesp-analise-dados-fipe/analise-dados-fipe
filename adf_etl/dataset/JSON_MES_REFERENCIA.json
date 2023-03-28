@@ -1,0 +1,34 @@
+{
+	"name": "JSON_MES_REFERENCIA",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ABS_FIPE_DATA",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "JSON"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "dados_referencia.json",
+				"folderPath": "mes_referencia",
+				"container": "fipe-data"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"code": {
+					"type": "string"
+				},
+				"month": {
+					"type": "string"
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
