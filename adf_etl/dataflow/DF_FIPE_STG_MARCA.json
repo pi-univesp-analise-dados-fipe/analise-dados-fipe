@@ -15,10 +15,11 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "ADS_FIPE_STG_REFERENCIA",
+						"referenceName": "ADS_FIPE_STG_MARCA",
 						"type": "DatasetReference"
 					},
-					"name": "fipeStgMesReferencia",
+					"name": "fipeStgMarca",
+					"description": "Export data to ADS_FIPE_STG_MARCA",
 					"rejectedDataLinkedService": {
 						"referenceName": "ABS_FIPE_DATA",
 						"type": "LinkedServiceReference"
@@ -52,16 +53,16 @@
 				"     updateable:false,",
 				"     upsertable:false,",
 				"     format: 'table',",
-				"     preSQLs:['TRUNCATE TABLE fipe.STG_MES_REFERENCIA'],",
+				"     preSQLs:['TRUNCATE TABLE fipe.STG_MARCA'],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     saveOrder: 1,",
 				"     errorHandlingOption: 'stopOnFirstError',",
 				"     mapColumn(",
 				"          DTA_INCLUSAO,",
-				"          COD_MES_REFERENCIA = code,",
-				"          NME_MES_REFERENCIA = month",
-				"     )) ~> fipeStgMesReferencia"
+				"          COD_MES_REFERENCIA = Value,",
+				"          NME_MES_REFERENCIA = Label",
+				"     )) ~> fipeStgMarca"
 			]
 		}
 	}
