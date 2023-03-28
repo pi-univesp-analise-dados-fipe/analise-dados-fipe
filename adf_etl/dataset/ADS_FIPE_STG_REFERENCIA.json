@@ -1,5 +1,5 @@
 {
-	"name": "ADS_FIPE_STG_RERENCIA",
+	"name": "ADS_FIPE_STG_REFERENCIA",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ASD",
