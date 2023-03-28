@@ -1,0 +1,679 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "df-fipe-etl"
+		},
+		"ABS_FIPE_DATA_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ABS_FIPE_DATA'"
+		},
+		"ASD_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ASD'"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/PL FIPE STG MES REFERENCIA')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "DF FIPE STG MARCA",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "DF_FIPE_STG_MARCA",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"jsonMarca": {},
+									"fipeStgMarca": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2023-03-28T13:46:25Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/DF_FIPE_STG_MARCA')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ADS_FIPE_STG_REFERENCIA')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ASD",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "STG"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "COD_MES_REFERENCIA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "NME_MES_REFERENCIA",
+						"type": "varchar"
+					},
+					{
+						"name": "DTA_INCLUSAO",
+						"type": "datetime2",
+						"scale": 2
+					}
+				],
+				"typeProperties": {
+					"schema": "fipe",
+					"table": "STG_MES_REFERENCIA"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ASD')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/JSON_ANO_MODELO')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ABS_FIPE_DATA",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "JSON"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "ano_modelo.json",
+						"folderPath": "ano_modelo",
+						"container": "fipe-data"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"Label": {
+							"type": "string"
+						},
+						"Value": {
+							"type": "string"
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ABS_FIPE_DATA')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/JSON_DADOS_MODELO')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ABS_FIPE_DATA",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "JSON"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "dados_modelo.json",
+						"folderPath": "dados_modelo",
+						"container": "fipe-data"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"Valor": {
+							"type": "string"
+						},
+						"Marca": {
+							"type": "string"
+						},
+						"Modelo": {
+							"type": "string"
+						},
+						"AnoModelo": {
+							"type": "integer"
+						},
+						"Combustivel": {
+							"type": "string"
+						},
+						"CodigoFipe": {
+							"type": "string"
+						},
+						"MesReferencia": {
+							"type": "string"
+						},
+						"Autenticacao": {
+							"type": "string"
+						},
+						"TipoVeiculo": {
+							"type": "integer"
+						},
+						"SiglaCombustivel": {
+							"type": "string"
+						},
+						"DataConsulta": {
+							"type": "string"
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ABS_FIPE_DATA')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/JSON_HISTORICO_MODELO')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ABS_FIPE_DATA",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "JSON"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "historico_modelo.json",
+						"folderPath": "historico_modelo",
+						"container": "fipe-data"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"Valor": {
+							"type": "string"
+						},
+						"Marca": {
+							"type": "string"
+						},
+						"Modelo": {
+							"type": "string"
+						},
+						"AnoModelo": {
+							"type": "integer"
+						},
+						"Combustivel": {
+							"type": "string"
+						},
+						"CodigoFipe": {
+							"type": "string"
+						},
+						"MesReferencia": {
+							"type": "string"
+						},
+						"Autenticacao": {
+							"type": "string"
+						},
+						"TipoVeiculo": {
+							"type": "integer"
+						},
+						"SiglaCombustivel": {
+							"type": "string"
+						},
+						"DataConsulta": {
+							"type": "string"
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ABS_FIPE_DATA')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/JSON_MARCA')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ABS_FIPE_DATA",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "JSON"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "marca.json",
+						"folderPath": "marca",
+						"container": "fipe-data"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"Label": {
+							"type": "string"
+						},
+						"Value": {
+							"type": "string"
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ABS_FIPE_DATA')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/JSON_MES_REFERENCIA')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ABS_FIPE_DATA",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "JSON"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "dados_referencia.json",
+						"folderPath": "mes_referencia",
+						"container": "fipe-data"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"code": {
+							"type": "string"
+						},
+						"month": {
+							"type": "string"
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ABS_FIPE_DATA')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/JSON_MODELO')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ABS_FIPE_DATA",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "JSON"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "modelo.json",
+						"folderPath": "modelo",
+						"container": "fipe-data"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"Modelos": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"Label": {
+										"type": "string"
+									},
+									"Value": {
+										"type": "integer"
+									}
+								}
+							}
+						},
+						"Anos": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"Label": {
+										"type": "string"
+									},
+									"Value": {
+										"type": "string"
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ABS_FIPE_DATA')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ABS_FIPE_DATA')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('ABS_FIPE_DATA_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ASD')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('ASD_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DF_FIPE_STG_MES_REFERENCIA')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "JSON_MES_REFERENCIA",
+								"type": "DatasetReference"
+							},
+							"name": "jsonSrc"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "ADS_FIPE_STG_REFERENCIA",
+								"type": "DatasetReference"
+							},
+							"name": "fipeStgMesReferencia",
+							"rejectedDataLinkedService": {
+								"referenceName": "ABS_FIPE_DATA",
+								"type": "LinkedServiceReference"
+							}
+						}
+					],
+					"transformations": [
+						{
+							"name": "dtaInclusao"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          code as string,",
+						"          month as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false,",
+						"     documentForm: 'documentPerLine') ~> jsonSrc",
+						"jsonSrc derive(DTA_INCLUSAO = currentTimestamp()) ~> dtaInclusao",
+						"dtaInclusao sink(allowSchemaDrift: false,",
+						"     validateSchema: true,",
+						"     input(",
+						"          COD_MES_REFERENCIA as integer,",
+						"          NME_MES_REFERENCIA as string,",
+						"          DTA_INCLUSAO as timestamp",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     format: 'table',",
+						"     preSQLs:['TRUNCATE TABLE fipe.STG_MES_REFERENCIA'],",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     saveOrder: 1,",
+						"     errorHandlingOption: 'stopOnFirstError',",
+						"     mapColumn(",
+						"          DTA_INCLUSAO,",
+						"          COD_MES_REFERENCIA = code,",
+						"          NME_MES_REFERENCIA = month",
+						"     )) ~> fipeStgMesReferencia"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/JSON_MES_REFERENCIA')]",
+				"[concat(variables('factoryId'), '/datasets/ADS_FIPE_STG_REFERENCIA')]",
+				"[concat(variables('factoryId'), '/linkedServices/ABS_FIPE_DATA')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ADS_FIPE_STG_MARCA')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ASD",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "STG"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "COD_MES_REFERENCIA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "NME_MES_REFERENCIA",
+						"type": "varchar"
+					},
+					{
+						"name": "DTA_INCLUSAO",
+						"type": "datetime2",
+						"scale": 2
+					}
+				],
+				"typeProperties": {
+					"schema": "fipe",
+					"table": "STG_MARCA"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ASD')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL FIPE STG MARCA')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "DF FIPE STG MARCA",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "DF_FIPE_STG_MES_REFERENCIA",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"jsonSrc": {},
+									"fipeStgMesReferencia": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2023-03-28T13:46:25Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/DF_FIPE_STG_MES_REFERENCIA')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DF_FIPE_STG_MARCA')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "JSON_MARCA",
+								"type": "DatasetReference"
+							},
+							"name": "jsonMarca"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "ADS_FIPE_STG_MARCA",
+								"type": "DatasetReference"
+							},
+							"name": "fipeStgMarca",
+							"description": "Export data to ADS_FIPE_STG_MARCA",
+							"rejectedDataLinkedService": {
+								"referenceName": "ABS_FIPE_DATA",
+								"type": "LinkedServiceReference"
+							}
+						}
+					],
+					"transformations": [
+						{
+							"name": "dtaInclusao"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          Label as string,",
+						"          Value as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false,",
+						"     documentForm: 'documentPerLine') ~> jsonMarca",
+						"jsonMarca derive(DTA_INCLUSAO = currentTimestamp()) ~> dtaInclusao",
+						"dtaInclusao sink(allowSchemaDrift: false,",
+						"     validateSchema: true,",
+						"     input(",
+						"          COD_MES_REFERENCIA as integer,",
+						"          NME_MES_REFERENCIA as string,",
+						"          DTA_INCLUSAO as timestamp",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     format: 'table',",
+						"     preSQLs:['TRUNCATE TABLE fipe.STG_MARCA'],",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     saveOrder: 1,",
+						"     errorHandlingOption: 'stopOnFirstError',",
+						"     mapColumn(",
+						"          DTA_INCLUSAO,",
+						"          COD_MES_REFERENCIA = Value,",
+						"          NME_MES_REFERENCIA = Label",
+						"     )) ~> fipeStgMarca"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/JSON_MARCA')]",
+				"[concat(variables('factoryId'), '/datasets/ADS_FIPE_STG_MARCA')]",
+				"[concat(variables('factoryId'), '/linkedServices/ABS_FIPE_DATA')]"
+			]
+		}
+	]
+}
