@@ -15,7 +15,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "ADS_FIPE_STG_RERENCIA",
+						"referenceName": "ADS_FIPE_STG_REFERENCIA",
 						"type": "DatasetReference"
 					},
 					"name": "fipeStgMesReferencia",
