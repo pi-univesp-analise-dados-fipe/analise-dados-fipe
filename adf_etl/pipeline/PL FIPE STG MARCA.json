@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "DF_FIPE_STG_MES_REFERENCIA",
+						"referenceName": "DF_FIPE_STG_MARCA",
 						"type": "DataFlowReference"
 					},
 					"compute": {
