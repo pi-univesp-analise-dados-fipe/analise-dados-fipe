@@ -13,7 +13,11 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://veiculos.fipe.org.br/api/veiculos/ConsultarTabelaDeReferencia",
+					"method": "POST"
+				}
 			}
 		],
 		"annotations": []
