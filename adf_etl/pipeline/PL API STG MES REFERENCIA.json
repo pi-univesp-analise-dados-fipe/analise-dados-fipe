@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "STG MES REFERENCIA",
+				"name": "API PARA STG MES REFERENCIA",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -16,13 +16,13 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "RestSource",
-						"httpRequestTimeout": "00:01:40",
-						"requestInterval": "00.00:00:00.010",
-						"requestMethod": "POST",
-						"requestBody": "{}",
-						"paginationRules": {
-							"supportRFC5988": "true"
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "HttpReadSettings",
+							"requestMethod": "GET"
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
 						}
 					},
 					"sink": {
@@ -60,7 +60,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "REST_FIPE_MES_REFERENCIA",
+						"referenceName": "JSON_FIPE_MARCA",
 						"type": "DatasetReference"
 					}
 				],

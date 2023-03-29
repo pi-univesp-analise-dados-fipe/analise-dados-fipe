@@ -145,11 +145,24 @@
 										"supportRFC5988": "true"
 									}
 								},
+								"sink": {
+									"type": "AzureSqlSink",
+									"preCopyScript": "truncate table FIPE.STG_MARCA",
+									"writeBehavior": "insert",
+									"sqlWriterUseTableLock": false,
+									"disableMetricsCollection": false
+								},
 								"enableStaging": false
 							},
 							"inputs": [
 								{
 									"referenceName": "REST_FIPE_MARCA",
+									"type": "DatasetReference"
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ADS_FIPE_STG_MARCA",
 									"type": "DatasetReference"
 								}
 							]

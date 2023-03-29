@@ -1,0 +1,18 @@
+{
+	"name": "JSON_FIPE_MARCA",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "FIPE ORG CONSULTA MARCA",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": "codigoTipoVeiculo=1&codigoTabelaReferencia=295"
+			}
+		},
+		"schema": {}
+	}
+}
