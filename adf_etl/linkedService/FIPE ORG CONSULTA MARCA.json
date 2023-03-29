@@ -1,0 +1,12 @@
+{
+	"name": "FIPE ORG CONSULTA MARCA",
+	"properties": {
+		"annotations": [],
+		"type": "HttpServer",
+		"typeProperties": {
+			"url": "https://veiculos.fipe.org.br/api/veiculos/ConsultarMarcas",
+			"enableServerCertificateValidation": false,
+			"authenticationType": "Anonymous"
+		}
+	}
+}
