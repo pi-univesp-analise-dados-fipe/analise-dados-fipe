@@ -95,6 +95,32 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "LKP MES REFERENCIA",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "SELECT COD_MES_REFERENCIA FROM FIPE.STG_MES_REFERENCIA",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ADS_FIPE_STG_REFERENCIA",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": true
+				}
 			}
 		],
 		"folder": {
