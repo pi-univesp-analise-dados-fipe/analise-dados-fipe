@@ -191,3 +191,6 @@ fabric.properties
 *.pb
 *.xml
 *.xml
+*.cache
+*.dbmdl
+FIPE-DW-SQL/.vs/FIPE-DW-SQL/v16/.suo
