@@ -1,0 +1,80 @@
+{
+	"name": "PL API STG MES REFERENCIA",
+	"properties": {
+		"activities": [
+			{
+				"name": "STG MES REFERENCIA",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "RestSource",
+						"httpRequestTimeout": "00:01:40",
+						"requestInterval": "00.00:00:00.010",
+						"requestMethod": "POST",
+						"requestBody": "{}",
+						"paginationRules": {
+							"supportRFC5988": "true"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "truncate table FIPE.STG_MES_REFERENCIA",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['Codigo']"
+								},
+								"sink": {
+									"name": "COD_MES_REFERENCIA",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Mes']"
+								},
+								"sink": {
+									"name": "NME_MES_REFERENCIA",
+									"type": "String"
+								}
+							}
+						],
+						"mapComplexValuesToString": true
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "REST_FIPE_MES_REFERENCIA",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ADS_FIPE_STG_REFERENCIA",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "API FIPE"
+		},
+		"annotations": []
+	}
+}
