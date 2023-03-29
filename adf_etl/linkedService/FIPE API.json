@@ -1,0 +1,12 @@
+{
+	"name": "FIPE API",
+	"properties": {
+		"annotations": [],
+		"type": "RestService",
+		"typeProperties": {
+			"url": "https://veiculos.fipe.org.br/api/veiculos/ConsultarTabelaDeReferencia",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}
