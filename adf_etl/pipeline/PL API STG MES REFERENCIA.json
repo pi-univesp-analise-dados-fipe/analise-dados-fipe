@@ -1,5 +1,5 @@
 {
-	"name": "GET MES REF",
+	"name": "PL API STG MES REFERENCIA",
 	"properties": {
 		"activities": [
 			{
@@ -20,7 +20,7 @@
 				}
 			},
 			{
-				"name": "Copy data1",
+				"name": "STG MES REFERENCIA",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -96,6 +96,9 @@
 				]
 			}
 		],
+		"folder": {
+			"name": "API FIPE"
+		},
 		"annotations": []
 	}
 }
