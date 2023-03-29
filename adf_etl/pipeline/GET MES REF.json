@@ -74,8 +74,8 @@
 									"path": "$['Mes']"
 								},
 								"sink": {
-									"name": "COD_MES_REFERENCIA",
-									"type": "Int32"
+									"name": "NME_MES_REFERENCIA",
+									"type": "String"
 								}
 							}
 						],
