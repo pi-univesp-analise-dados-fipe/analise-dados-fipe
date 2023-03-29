@@ -1,0 +1,9 @@
+{
+	"name": "df-fipe-etl",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "e5b87ddd-1e2e-46b7-a287-efa92215ce1e",
+		"tenantId": "dee74457-d751-4011-a5c4-44560cf8b415"
+	}
+}

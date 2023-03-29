@@ -1,0 +1,35 @@
+{
+	"name": "ADS_FIPE_STG_MARCA",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ASD",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "STG"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "COD_MES_REFERENCIA",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "NME_MES_REFERENCIA",
+				"type": "varchar"
+			},
+			{
+				"name": "DTA_INCLUSAO",
+				"type": "datetime2",
+				"scale": 2
+			}
+		],
+		"typeProperties": {
+			"schema": "fipe",
+			"table": "STG_MARCA"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
