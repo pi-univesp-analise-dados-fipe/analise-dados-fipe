@@ -95,6 +95,93 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Loop",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "LKP MES REFERENCIA",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('LKP MES REFERENCIA').output.value",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "API PARA STG MARCA",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "RestSource",
+									"httpRequestTimeout": "00:01:40",
+									"requestInterval": "00.00:00:00.010",
+									"requestMethod": "POST",
+									"requestBody": "{}",
+									"additionalHeaders": {
+										"codigoTipoVeiculo": {
+											"value": "activity('LKP MES REFERENCIA').output.value",
+											"type": "Expression"
+										},
+										"codigoTabelaReferencia": "activity('LKP MES REFERENCIA').output.value"
+									},
+									"paginationRules": {
+										"supportRFC5988": "true"
+									}
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "REST_FIPE_MARCA",
+									"type": "DatasetReference"
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"name": "LKP MES REFERENCIA",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "SELECT COD_MES_REFERENCIA, COD_TIPO_MODELO\nFROM FIPE.STG_MES_REFERENCIA\nCROSS join fipe.STG_TIPO_MODELO\n\n",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ADS_FIPE_STG_REFERENCIA",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": true
+				}
 			}
 		],
 		"folder": {

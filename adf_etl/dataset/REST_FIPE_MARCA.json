@@ -1,10 +1,6 @@
 {
 	"name": "REST_FIPE_MARCA",
 	"properties": {
-		"linkedServiceName": {
-			"referenceName": "FIPE API",
-			"type": "LinkedServiceReference"
-		},
 		"folder": {
 			"name": "API FIPE"
 		},
