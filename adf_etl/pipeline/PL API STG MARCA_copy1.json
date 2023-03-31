@@ -73,7 +73,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "SELECT concat('?codigoTipoVeiculo=', COD_TIPO_MODELO, '&codigoTabelaReferencia=', COD_MES_REFERENCIA) as URL_PARAMS\nFROM FIPE.STG_MES_REFERENCIA\nCROSS join fipe.STG_TIPO_MODELO",
+						"sqlReaderQuery": "SELECT \nCOD_TIPO_MODELO, \nCOD_MES_REFERENCIA, \nconcat('?codigoTipoVeiculo=', COD_TIPO_MODELO, '&codigoTabelaReferencia=', COD_MES_REFERENCIA) as URL_PARAMS\nFROM FIPE.STG_MES_REFERENCIA\nCROSS join fipe.STG_TIPO_MODELO",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
