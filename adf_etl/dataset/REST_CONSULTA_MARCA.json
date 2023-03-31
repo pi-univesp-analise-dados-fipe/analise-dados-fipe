@@ -21,7 +21,7 @@
 		"annotations": [],
 		"type": "RestResource",
 		"typeProperties": {
-			"relativeUrl": "ConsultarMarcas?codigoTipoVeiculo=1&codigoTabelaReferencia=295"
+			"relativeUrl": "ConsultarMarcas"
 		},
 		"schema": []
 	}
