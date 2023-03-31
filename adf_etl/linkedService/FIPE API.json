@@ -1,16 +1,6 @@
 {
 	"name": "FIPE API",
 	"properties": {
-		"parameters": {
-			"codigoTipoVeiculo": {
-				"type": "int",
-				"defaultValue": 1
-			},
-			"codigoTabelaReferencia": {
-				"type": "int",
-				"defaultValue": 295
-			}
-		},
 		"annotations": [],
 		"type": "RestService",
 		"typeProperties": {
