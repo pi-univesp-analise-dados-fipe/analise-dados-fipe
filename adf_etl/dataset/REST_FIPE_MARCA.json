@@ -3,7 +3,21 @@
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "FIPE API",
-			"type": "LinkedServiceReference"
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"codigoTipoVeiculo": 1,
+				"codigoTabelaReferencia": 295
+			}
+		},
+		"parameters": {
+			"codigoTipoVeiculo": {
+				"type": "int",
+				"defaultValue": 1
+			},
+			"codigoTabelaReferencia": {
+				"type": "int",
+				"defaultValue": 295
+			}
 		},
 		"folder": {
 			"name": "API FIPE"
