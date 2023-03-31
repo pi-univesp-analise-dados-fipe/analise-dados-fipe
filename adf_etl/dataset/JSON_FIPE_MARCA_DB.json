@@ -1,0 +1,18 @@
+{
+	"name": "JSON_FIPE_MARCA_DB",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "FIPE ORG CONSULTA MARCA",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": "ConsultarMarcas/"
+			}
+		},
+		"schema": {}
+	}
+}
