@@ -4,7 +4,7 @@
 		"annotations": [],
 		"type": "HttpServer",
 		"typeProperties": {
-			"url": "https://veiculos.fipe.org.br/api/veiculos",
+			"url": "https://veiculos.fipe.org.br/api/veiculos/",
 			"enableServerCertificateValidation": false,
 			"authenticationType": "Anonymous"
 		}
