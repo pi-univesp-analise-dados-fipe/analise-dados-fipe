@@ -15,6 +15,9 @@
 				"defaultValue": 1
 			}
 		},
+		"folder": {
+			"name": "API FIPE"
+		},
 		"annotations": [],
 		"type": "RestResource",
 		"typeProperties": {
