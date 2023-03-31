@@ -23,8 +23,8 @@
 					"isSequential": true,
 					"activities": [
 						{
-							"name": "API PARA STG MARCA",
-							"type": "Copy",
+							"name": "Web1",
+							"type": "WebActivity",
 							"dependsOn": [],
 							"policy": {
 								"timeout": "0.12:00:00",
@@ -35,72 +35,8 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
-								"source": {
-									"type": "RestSource",
-									"httpRequestTimeout": "00:01:40",
-									"requestInterval": "00.00:00:00.010",
-									"requestMethod": "POST",
-									"requestBody": "{}",
-									"additionalHeaders": {
-										"codigoTabelaReferencia": {
-											"value": "@item().COD_MES_REFERENCIA",
-											"type": "Expression"
-										},
-										"codigoTipoVeiculo": {
-											"value": "@item().COD_TIPO_VEICULO",
-											"type": "Expression"
-										}
-									},
-									"paginationRules": {
-										"supportRFC5988": "true"
-									}
-								},
-								"sink": {
-									"type": "AzureSqlSink",
-									"preCopyScript": "truncate table FIPE.STG_MARCA",
-									"writeBehavior": "insert",
-									"sqlWriterUseTableLock": false,
-									"disableMetricsCollection": false
-								},
-								"enableStaging": false,
-								"translator": {
-									"type": "TabularTranslator",
-									"mappings": [
-										{
-											"source": {
-												"path": "$['codigo']"
-											}
-										},
-										{
-											"source": {
-												"path": "$['erro']"
-											}
-										}
-									]
-								}
-							},
-							"inputs": [
-								{
-									"referenceName": "REST_CONSULTA_MARCA",
-									"type": "DatasetReference",
-									"parameters": {
-										"codigoTipoVeiculo": {
-											"value": "@item().COD_TIPO_VEICULO",
-											"type": "Expression"
-										},
-										"codigoTabelaReferencia": {
-											"value": "@item().COD_MES_REFERENCIA",
-											"type": "Expression"
-										}
-									}
-								}
-							],
-							"outputs": [
-								{
-									"referenceName": "ADS_FIPE_STG_MARCA",
-									"type": "DatasetReference"
-								}
-							]
+								"method": "POST"
+							}
 						}
 					]
 				}
@@ -120,7 +56,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "SELECT top 2 COD_MES_REFERENCIA, COD_TIPO_MODELO\nFROM FIPE.STG_MES_REFERENCIA\nCROSS join fipe.STG_TIPO_MODELO\n\n",
+						"sqlReaderQuery": "SELECT concat('?codigoTipoVeiculo=', COD_TIPO_MODELO, '&codigoTabelaReferencia=', COD_MES_REFERENCIA) as URL_PARAMS\nFROM FIPE.STG_MES_REFERENCIA\nCROSS join fipe.STG_TIPO_MODELO",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
