@@ -13,6 +13,16 @@
 				"relativeUrl": "ConsultarMarcas/"
 			}
 		},
-		"schema": {}
+		"schema": {
+			"type": "object",
+			"properties": {
+				"codigo": {
+					"type": "string"
+				},
+				"erro": {
+					"type": "string"
+				}
+			}
+		}
 	}
 }
