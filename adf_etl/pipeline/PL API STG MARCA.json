@@ -25,7 +25,14 @@
 						{
 							"name": "API PARA STG MARCA",
 							"type": "Copy",
-							"dependsOn": [],
+							"dependsOn": [
+								{
+									"activity": "Web1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
 							"policy": {
 								"timeout": "0.12:00:00",
 								"retry": 0,
@@ -42,11 +49,11 @@
 									"requestMethod": "POST",
 									"requestBody": "{}",
 									"additionalHeaders": {
-										"codigoTipoVeiculo": {
+										"codigoTabelaReferencia": {
 											"value": "@item().COD_MES_REFERENCIA",
 											"type": "Expression"
 										},
-										"codigoTabelaReferencia": {
+										"codigoTipoVeiculo": {
 											"value": "@item().COD_TIPO_VEICULO",
 											"type": "Expression"
 										}
@@ -62,11 +69,26 @@
 									"sqlWriterUseTableLock": false,
 									"disableMetricsCollection": false
 								},
-								"enableStaging": false
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"mappings": [
+										{
+											"source": {
+												"path": "$['codigo']"
+											}
+										},
+										{
+											"source": {
+												"path": "$['erro']"
+											}
+										}
+									]
+								}
 							},
 							"inputs": [
 								{
-									"referenceName": "REST_FIPE_MARCA",
+									"referenceName": "REST_CONSULTA_MARCA",
 									"type": "DatasetReference"
 								}
 							],
@@ -76,6 +98,26 @@
 									"type": "DatasetReference"
 								}
 							]
+						},
+						{
+							"name": "Web1",
+							"type": "WebActivity",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"url": {
+									"value": "@concat('https://veiculos.fipe.org.br/api/veiculos/ConsultarMarcas?codigoTipoVeiculo=',item().COD_TIPO_VEICULO, '&codigoTabelaReferencia=',item().COD_MES_REFERENCIA)",
+									"type": "Expression"
+								},
+								"method": "POST"
+							}
 						}
 					]
 				}

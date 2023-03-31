@@ -5,6 +5,16 @@
 			"referenceName": "FIPE API",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"codigoTipoVeiculo": {
+				"type": "int",
+				"defaultValue": 1
+			},
+			"codigoTabelaReferencia": {
+				"type": "int",
+				"defaultValue": 1
+			}
+		},
 		"annotations": [],
 		"type": "RestResource",
 		"typeProperties": {
