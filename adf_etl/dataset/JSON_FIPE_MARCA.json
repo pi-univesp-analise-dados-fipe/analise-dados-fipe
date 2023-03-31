@@ -10,9 +10,19 @@
 		"typeProperties": {
 			"location": {
 				"type": "HttpServerLocation",
-				"relativeUrl": "codigoTipoVeiculo=1&codigoTabelaReferencia=295"
+				"relativeUrl": "ConsultarMarcas?codigoTipoVeiculo=1&codigoTabelaReferencia=295"
 			}
 		},
-		"schema": {}
+		"schema": {
+			"type": "object",
+			"properties": {
+				"Label": {
+					"type": "string"
+				},
+				"Value": {
+					"type": "string"
+				}
+			}
+		}
 	}
 }
