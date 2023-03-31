@@ -1,0 +1,15 @@
+{
+	"name": "REST",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "FIPE API",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": "ConsultarMarcas"
+		},
+		"schema": []
+	}
+}
