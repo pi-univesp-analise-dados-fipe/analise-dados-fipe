@@ -5,13 +5,23 @@
 			"referenceName": "FIPE API",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"codigoTipoVeiculo": {
+				"type": "string",
+				"defaultValue": "1"
+			},
+			"codigoTabelaReferencia": {
+				"type": "string",
+				"defaultValue": "1"
+			}
+		},
 		"folder": {
 			"name": "API FIPE"
 		},
 		"annotations": [],
 		"type": "RestResource",
 		"typeProperties": {
-			"relativeUrl": "ConsultarMarcas"
+			"relativeUrl": "ConsultarMarcas?codigoTipoVeiculo=1&codigoTabelaReferencia=295"
 		},
 		"schema": []
 	}
