@@ -1,0 +1,140 @@
+{
+	"name": "PL API STG MARCA_copy1",
+	"properties": {
+		"description": "NECESSÁRIO INFORMAR PARAMETRO DE MES E PERIODO DE REFERENCIA\n",
+		"activities": [
+			{
+				"name": "Loop",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "LKP MES REFERENCIA",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('LKP MES REFERENCIA').output.value",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "API PARA STG MARCA",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "RestSource",
+									"httpRequestTimeout": "00:01:40",
+									"requestInterval": "00.00:00:00.010",
+									"requestMethod": "POST",
+									"requestBody": "{}",
+									"additionalHeaders": {
+										"codigoTabelaReferencia": {
+											"value": "@item().COD_MES_REFERENCIA",
+											"type": "Expression"
+										},
+										"codigoTipoVeiculo": {
+											"value": "@item().COD_TIPO_VEICULO",
+											"type": "Expression"
+										}
+									},
+									"paginationRules": {
+										"supportRFC5988": "true"
+									}
+								},
+								"sink": {
+									"type": "AzureSqlSink",
+									"preCopyScript": "truncate table FIPE.STG_MARCA",
+									"writeBehavior": "insert",
+									"sqlWriterUseTableLock": false,
+									"disableMetricsCollection": false
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"mappings": [
+										{
+											"source": {
+												"path": "$['codigo']"
+											}
+										},
+										{
+											"source": {
+												"path": "$['erro']"
+											}
+										}
+									]
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "REST_CONSULTA_MARCA",
+									"type": "DatasetReference",
+									"parameters": {
+										"codigoTipoVeiculo": {
+											"value": "@item().COD_TIPO_VEICULO",
+											"type": "Expression"
+										},
+										"codigoTabelaReferencia": {
+											"value": "@item().COD_MES_REFERENCIA",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ADS_FIPE_STG_MARCA",
+									"type": "DatasetReference"
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"name": "LKP MES REFERENCIA",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "SELECT top 2 COD_MES_REFERENCIA, COD_TIPO_MODELO\nFROM FIPE.STG_MES_REFERENCIA\nCROSS join fipe.STG_TIPO_MODELO\n\n",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ADS_FIPE_STG_REFERENCIA",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": true
+				}
+			}
+		],
+		"folder": {
+			"name": "API FIPE"
+		},
+		"annotations": []
+	}
+}
