@@ -23,8 +23,8 @@
 					"isSequential": true,
 					"activities": [
 						{
-							"name": "Web1",
-							"type": "WebActivity",
+							"name": "GET DADOS DINAMICOS DE SQL",
+							"type": "Copy",
 							"dependsOn": [],
 							"policy": {
 								"timeout": "0.12:00:00",
@@ -35,8 +35,25 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
-								"method": "POST"
-							}
+								"source": {
+									"type": "JsonSource",
+									"storeSettings": {
+										"type": "HttpReadSettings",
+										"requestMethod": "POST",
+										"requestTimeout": ""
+									},
+									"formatSettings": {
+										"type": "JsonReadSettings"
+									}
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "JSON_FIPE_MARCA",
+									"type": "DatasetReference"
+								}
+							]
 						}
 					]
 				}

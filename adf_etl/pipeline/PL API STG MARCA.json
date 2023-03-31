@@ -89,7 +89,13 @@
 							"inputs": [
 								{
 									"referenceName": "REST_CONSULTA_MARCA",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"codigoTabelaReferencia": {
+											"value": "@item().COD_MES_REFERENCIA",
+											"type": "Expression"
+										}
+									}
 								}
 							],
 							"outputs": [
