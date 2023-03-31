@@ -4,82 +4,6 @@
 		"description": "NECESSÁRIO INFORMAR PARAMETRO DE MES E PERIODO DE REFERENCIA\n",
 		"activities": [
 			{
-				"name": "GET MARCA",
-				"type": "WebActivity",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"url": "https://veiculos.fipe.org.br/api/veiculos/ConsultarMarcas?codigoTipoVeiculo=1&codigoTabelaReferencia=295",
-					"method": "POST"
-				}
-			},
-			{
-				"name": "Copy data1",
-				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "GET MARCA",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"sink": {
-						"type": "AzureSqlSink",
-						"preCopyScript": "truncate table FIPE.STG_MES_REFERENCIA",
-						"writeBehavior": "insert",
-						"sqlWriterUseTableLock": false,
-						"disableMetricsCollection": false
-					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"mappings": [
-							{
-								"source": {
-									"path": "$['Codigo']"
-								},
-								"sink": {
-									"name": "COD_MES_REFERENCIA",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"path": "$['Mes']"
-								},
-								"sink": {
-									"name": "NME_MES_REFERENCIA",
-									"type": "String"
-								}
-							}
-						]
-					}
-				},
-				"outputs": [
-					{
-						"referenceName": "ADS_FIPE_STG_REFERENCIA",
-						"type": "DatasetReference"
-					}
-				]
-			},
-			{
 				"name": "Loop",
 				"type": "ForEach",
 				"dependsOn": [
@@ -119,10 +43,13 @@
 									"requestBody": "{}",
 									"additionalHeaders": {
 										"codigoTipoVeiculo": {
-											"value": "activity('LKP MES REFERENCIA').output.value",
+											"value": "@item().COD_MES_REFERENCIA",
 											"type": "Expression"
 										},
-										"codigoTabelaReferencia": "activity('LKP MES REFERENCIA').output.value"
+										"codigoTabelaReferencia": {
+											"value": "@item().COD_TIPO_VEICULO",
+											"type": "Expression"
+										}
 									},
 									"paginationRules": {
 										"supportRFC5988": "true"
