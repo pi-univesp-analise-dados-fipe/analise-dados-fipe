@@ -1,0 +1,110 @@
+{
+	"name": "PL FIPE STG MODELO",
+	"properties": {
+		"activities": [
+			{
+				"name": "STG MODELO",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": false,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "TRUNCATE TABLE FIPE.STG_MODELO",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['codigoModelo']"
+								},
+								"sink": {
+									"name": "COD_MODELO",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nomeModelo']"
+								},
+								"sink": {
+									"name": "NME_MODELO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['codigoTipoVeiculo']"
+								},
+								"sink": {
+									"name": "COD_TIPO_VEICULO",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['codigoMesReferencia']"
+								},
+								"sink": {
+									"name": "COD_MES_REFERENCIA",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['codigoMarca']"
+								},
+								"sink": {
+									"name": "COD_MES_REFERENCIA",
+									"type": "Int32"
+								}
+							}
+						],
+						"collectionReference": ""
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "JSON_MODELO",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ADS_FIPE_STG_MODELO",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "BLOB FIPE"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-03-28T16:27:06Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
