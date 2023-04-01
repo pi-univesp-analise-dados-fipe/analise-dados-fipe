@@ -1,0 +1,50 @@
+{
+	"name": "ADS_FIPE_STG_MODELO",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ASD",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "DB_STG"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "COD_MODELO",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "NME_MODELO",
+				"type": "varchar"
+			},
+			{
+				"name": "COD_TIPO_VEICULO",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "COD_MES_REFERENCIA",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "COD_MARCA",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DTA_INCLUSAO",
+				"type": "datetime2",
+				"scale": 2
+			}
+		],
+		"typeProperties": {
+			"schema": "fipe",
+			"table": "STG_MODELO"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
