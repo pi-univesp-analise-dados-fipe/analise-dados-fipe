@@ -16,14 +16,13 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "JsonSource",
-						"storeSettings": {
-							"type": "AzureBlobStorageReadSettings",
-							"recursive": true,
-							"enablePartitionDiscovery": false
-						},
-						"formatSettings": {
-							"type": "JsonReadSettings"
+						"type": "RestSource",
+						"httpRequestTimeout": "00:01:40",
+						"requestInterval": "00.00:00:00.010",
+						"requestMethod": "POST",
+						"requestBody": "{}",
+						"paginationRules": {
+							"supportRFC5988": "true"
 						}
 					},
 					"sink": {
@@ -39,7 +38,7 @@
 						"mappings": [
 							{
 								"source": {
-									"path": "$['code']"
+									"path": "$['Codigo']"
 								},
 								"sink": {
 									"name": "COD_MES_REFERENCIA",
@@ -48,7 +47,7 @@
 							},
 							{
 								"source": {
-									"path": "$['month']"
+									"path": "$['Mes']"
 								},
 								"sink": {
 									"name": "NME_MES_REFERENCIA",
@@ -61,7 +60,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "JSON_MES_REFERENCIA",
+						"referenceName": "REST_FIPE_MES_REFERENCIA",
 						"type": "DatasetReference"
 					}
 				],
