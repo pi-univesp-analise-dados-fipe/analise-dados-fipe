@@ -40,21 +40,37 @@
 							{
 								"source": {
 									"path": "$['codigoMarca']"
+								},
+								"sink": {
+									"name": "COD_MARCA",
+									"type": "Int32"
 								}
 							},
 							{
 								"source": {
 									"path": "$['nomeMarca']"
+								},
+								"sink": {
+									"name": "NME_MARCA",
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"path": "$['codigoTipoVeiculo']"
+								},
+								"sink": {
+									"name": "COD_TIPO_VEICULO",
+									"type": "Int32"
 								}
 							},
 							{
 								"source": {
 									"path": "$['codigoMesReferencia']"
+								},
+								"sink": {
+									"name": "COD_MES_REFERENCIA",
+									"type": "Int32"
 								}
 							}
 						],

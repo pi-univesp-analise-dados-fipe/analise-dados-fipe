@@ -5,6 +5,9 @@
 			"referenceName": "FIPE ORG CONSULTA MARCA",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "API FIPE"
+		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {

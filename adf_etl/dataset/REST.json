@@ -5,6 +5,9 @@
 			"referenceName": "FIPE API",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "API FIPE"
+		},
 		"annotations": [],
 		"type": "RestResource",
 		"typeProperties": {
