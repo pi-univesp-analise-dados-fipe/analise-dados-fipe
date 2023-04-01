@@ -39,7 +39,7 @@
 						"mappings": [
 							{
 								"source": {
-									"path": "$['Codigo']"
+									"path": "$['code']"
 								},
 								"sink": {
 									"name": "COD_MES_REFERENCIA",
@@ -48,7 +48,7 @@
 							},
 							{
 								"source": {
-									"path": "$['Mes']"
+									"path": "$['month']"
 								},
 								"sink": {
 									"name": "NME_MES_REFERENCIA",
