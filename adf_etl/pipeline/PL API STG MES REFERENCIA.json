@@ -18,8 +18,9 @@
 					"source": {
 						"type": "JsonSource",
 						"storeSettings": {
-							"type": "HttpReadSettings",
-							"requestMethod": "GET"
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
 							"type": "JsonReadSettings"
@@ -60,7 +61,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "JSON_FIPE_MARCA",
+						"referenceName": "JSON_MES_REFERENCIA",
 						"type": "DatasetReference"
 					}
 				],
