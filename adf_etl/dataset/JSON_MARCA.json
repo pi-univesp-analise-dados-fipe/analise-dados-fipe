@@ -13,7 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "marca.json",
+				"fileName": "marcas.json",
 				"folderPath": "marca",
 				"container": "fipe-data"
 			}
@@ -21,11 +21,17 @@
 		"schema": {
 			"type": "object",
 			"properties": {
-				"Label": {
+				"codigoMarca": {
+					"type": "integer"
+				},
+				"nomeMarca": {
 					"type": "string"
 				},
-				"Value": {
-					"type": "string"
+				"codigoTipoVeiculo": {
+					"type": "integer"
+				},
+				"codigoMesReferencia": {
+					"type": "integer"
 				}
 			}
 		}
