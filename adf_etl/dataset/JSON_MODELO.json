@@ -13,7 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "modelo.json",
+				"fileName": "modelos.json",
 				"folderPath": "modelo",
 				"container": "fipe-data"
 			}
@@ -21,33 +21,20 @@
 		"schema": {
 			"type": "object",
 			"properties": {
-				"Modelos": {
-					"type": "array",
-					"items": {
-						"type": "object",
-						"properties": {
-							"Label": {
-								"type": "string"
-							},
-							"Value": {
-								"type": "integer"
-							}
-						}
-					}
+				"codigoModelo": {
+					"type": "integer"
 				},
-				"Anos": {
-					"type": "array",
-					"items": {
-						"type": "object",
-						"properties": {
-							"Label": {
-								"type": "string"
-							},
-							"Value": {
-								"type": "string"
-							}
-						}
-					}
+				"nomeModelo": {
+					"type": "string"
+				},
+				"codigoTipoVeiculo": {
+					"type": "integer"
+				},
+				"codigoMesReferencia": {
+					"type": "integer"
+				},
+				"codigoMarca": {
+					"type": "integer"
 				}
 			}
 		}
