@@ -78,7 +78,7 @@
 									"path": "$['codigoMarca']"
 								},
 								"sink": {
-									"name": "COD_MES_REFERENCIA",
+									"name": "COD_MARCA",
 									"type": "Int32"
 								}
 							}
