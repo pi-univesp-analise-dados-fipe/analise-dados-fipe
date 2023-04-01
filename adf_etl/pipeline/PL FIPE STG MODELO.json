@@ -39,19 +39,19 @@
 						"mappings": [
 							{
 								"source": {
-									"path": "$['codigoMarca']"
+									"path": "$['codigoModelo']"
 								},
 								"sink": {
-									"name": "COD_MARCA",
+									"name": "COD_MODELO",
 									"type": "Int32"
 								}
 							},
 							{
 								"source": {
-									"path": "$['nomeMarca']"
+									"path": "$['nomeModelo']"
 								},
 								"sink": {
-									"name": "NME_MARCA",
+									"name": "NME_MODELO",
 									"type": "String"
 								}
 							},
@@ -72,6 +72,15 @@
 									"name": "COD_MES_REFERENCIA",
 									"type": "Int32"
 								}
+							},
+							{
+								"source": {
+									"path": "$['codigoMarca']"
+								},
+								"sink": {
+									"name": "COD_MARCA",
+									"type": "Int32"
+								}
 							}
 						],
 						"collectionReference": ""
@@ -85,7 +94,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ADS_FIPE_STG_MARCA",
+						"referenceName": "ADS_FIPE_STG_MODELO",
 						"type": "DatasetReference"
 					}
 				]
