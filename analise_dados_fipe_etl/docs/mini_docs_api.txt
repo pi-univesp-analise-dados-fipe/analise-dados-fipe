@@ -13,7 +13,13 @@ Exemplo:
 https://parallelum.com.br/fipe/api/v2/{vehicleType}/brands
 
 vehicleType: Enum:  "cars" "motorcycles" "trucks"
-
+Exemplo
+[
+  {
+    "code": "1",
+    "name": "Acura"
+  }
+]
 
 3 - Modelos por marca 
 https://parallelum.com.br/fipe/api/v2/{vehicleType}/brands/{brandId}/models
