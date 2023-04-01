@@ -13,7 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "historico_modelo.json",
+				"fileName": "amostra_historico_modelos.json",
 				"folderPath": "historico_modelo",
 				"container": "fipe-data"
 			}
@@ -53,6 +53,21 @@
 				},
 				"DataConsulta": {
 					"type": "string"
+				},
+				"codigoTipoVeiculo": {
+					"type": "integer"
+				},
+				"codigoMesReferencia": {
+					"type": "integer"
+				},
+				"codigoMarca": {
+					"type": "integer"
+				},
+				"codigoModelo": {
+					"type": "integer"
+				},
+				"codigoTipoCombustivel": {
+					"type": "integer"
 				}
 			}
 		}
