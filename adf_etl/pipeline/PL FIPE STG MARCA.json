@@ -3,8 +3,8 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "DF FIPE STG MARCA",
-				"type": "ExecuteDataFlow",
+				"name": "STG MARCA",
+				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -15,16 +15,63 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"dataflow": {
-						"referenceName": "DF_FIPE_STG_MES_REFERENCIA",
-						"type": "DataFlowReference"
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": false,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
 					},
-					"compute": {
-						"coreCount": 8,
-						"computeType": "General"
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "TRUNCATE TABLE FIPE.STG_MARCA",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
 					},
-					"traceLevel": "Fine"
-				}
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['codigoMarca']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nomeMarca']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['codigoTipoVeiculo']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['codigoMesReferencia']"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "JSON_MARCA",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ADS_FIPE_STG_MARCA",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"folder": {
