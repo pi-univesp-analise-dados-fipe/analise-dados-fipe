@@ -6,7 +6,7 @@
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "STG"
+			"name": "DB_STG"
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",

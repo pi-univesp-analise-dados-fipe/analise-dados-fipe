@@ -49,6 +49,9 @@
 				"defaultValue": "17"
 			}
 		},
+		"folder": {
+			"name": "TESTES"
+		},
 		"annotations": []
 	}
 }
