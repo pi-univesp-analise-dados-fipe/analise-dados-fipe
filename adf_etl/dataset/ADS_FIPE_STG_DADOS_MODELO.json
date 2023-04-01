@@ -12,7 +12,7 @@
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "COD_ANO_REFERENCIA",
+				"name": "COD_MES_REFERENCIA",
 				"type": "int",
 				"precision": 10
 			},
