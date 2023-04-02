@@ -529,3 +529,7 @@ FodyWeavers.xsd
 # Additional files built by Visual Studio
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,visualstudio,pycharm
+
+FIPE-DW-SQL\FIPE-DW-SQL\obj
+
+analise_dados_fipe_etl\.idea
