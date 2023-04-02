@@ -28,7 +28,7 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"preCopyScript": "TRUNCATE TABLE FIPE.STG_DADOS_MODELO",
+						"preCopyScript": "TRUNCATE TABLE fipe_stg.STG_DADOS_MODELO",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": true,
 						"disableMetricsCollection": false
