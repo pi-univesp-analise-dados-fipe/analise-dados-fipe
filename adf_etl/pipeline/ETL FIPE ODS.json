@@ -1,0 +1,111 @@
+{
+	"name": "ETL FIPE ODS",
+	"properties": {
+		"activities": [
+			{
+				"name": "SP ODS MARCA",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[fipe_ods].[SP_ODS_MARCA]"
+				},
+				"linkedServiceName": {
+					"referenceName": "ASD",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "SP ODS MES REFERENCIA",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[fipe_ods].[SP_ODS_MES_REFERENCIA]"
+				},
+				"linkedServiceName": {
+					"referenceName": "ASD",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "SP ODS MODELO",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "SP ODS MARCA",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "SP ODS MES REFERENCIA",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[fipe_ods].[SP_ODS_MODELO]"
+				},
+				"linkedServiceName": {
+					"referenceName": "ASD",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "SP ODS DADOS MODELO",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "SP ODS MODELO",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[fipe_ods].[SP_ODS_DADOS_MODELO]"
+				},
+				"linkedServiceName": {
+					"referenceName": "ASD",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"folder": {
+			"name": "ETL"
+		},
+		"annotations": []
+	}
+}
