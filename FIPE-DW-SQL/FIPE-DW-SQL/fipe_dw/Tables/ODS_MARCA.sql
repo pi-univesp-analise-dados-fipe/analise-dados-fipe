@@ -1,4 +1,4 @@
-﻿CREATE TABLE [fipe].[ODS_MARCA] (
+﻿CREATE TABLE [fipe_ods].[ODS_MARCA] (
     [COD_MARCA]				[int]			NOT NULL,
 	[NME_MARCA]				[varchar]  (30)	NULL,
     [COD_TIPO_VEICULO]		[int]			NULL,
@@ -8,5 +8,5 @@
 );
 GO
 
-ALTER TABLE [fipe].[ODS_MARCA] 
+ALTER TABLE [fipe_ods].[ODS_MARCA] 
     ADD CONSTRAINT [DF_ODS_MARCA_DTA_INCLUSAO] DEFAULT (GETDATE()) FOR DTA_INCLUSAO

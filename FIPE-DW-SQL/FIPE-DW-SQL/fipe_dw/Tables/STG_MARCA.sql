@@ -1,4 +1,4 @@
-﻿CREATE TABLE [fipe].[STG_MARCA] (
+﻿CREATE TABLE [fipe_stg].[STG_MARCA] (
     [COD_MARCA]          INT           NULL,
     [NME_MARCA]          VARCHAR (30)  NULL,
     [COD_TIPO_VEICULO]   INT           NULL,
@@ -9,5 +9,4 @@
 
 GO
 CREATE CLUSTERED INDEX [IXC_STG_MARCA]
-    ON [fipe].[STG_MARCA]([COD_MARCA] ASC, [COD_TIPO_VEICULO] ASC);
-
+    ON [fipe_stg].[STG_MARCA]([COD_MARCA] ASC, [COD_TIPO_VEICULO] ASC);

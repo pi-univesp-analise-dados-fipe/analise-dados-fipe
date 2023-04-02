@@ -1,4 +1,4 @@
-﻿CREATE SCHEMA [fipe_dw]
+﻿CREATE SCHEMA [fipe_ods]
     AUTHORIZATION [dev_user];
 
 
