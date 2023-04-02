@@ -56,8 +56,38 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
-    <Folder Include="stg" />
-    <Folder Include="ods" />
-    <Folder Include="dw" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="fipe\" />
+    <Folder Include="fipe\Tables\" />
+    <Folder Include="fipe\Views\" />
+    <Folder Include="Security\" />
+    <Folder Include="fipe\Stored Procedures" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\fipe_historico_precos.sql" />
+    <Build Include="fipe\Tables\ODS_DADOS_MODELO.sql" />
+    <Build Include="fipe\Tables\ODS_MARCA.sql" />
+    <Build Include="fipe\Tables\ODS_MES_REFERENCIA.sql" />
+    <Build Include="fipe\Tables\ODS_MODELO.sql" />
+    <Build Include="fipe\Tables\STG_DADOS_MODELO.sql" />
+    <Build Include="fipe\Tables\STG_MARCA.sql" />
+    <Build Include="fipe\Tables\STG_MES_REFERENCIA.sql" />
+    <Build Include="fipe\Tables\STG_MODELO.sql" />
+    <Build Include="fipe\Views\VW_DIM_TIPO_MODELO.sql" />
+    <Build Include="Security\dev_user.sql" />
+    <Build Include="Security\RoleMemberships.sql" />
+    <Build Include="Security\fipe.sql" />
+    <Build Include="fipe\Stored Procedures\SP_ODS_MARCA.sql" />
+    <Build Include="fipe\Stored Procedures\SP_ODS_MODELO.sql" />
+    <Build Include="fipe\Stored Procedures\SP_ODS_MES_REFERENCIA.sql" />
+    <Build Include="fipe\Views\VW_DIM_TIPO_COMBUSTIVEL.sql" />
+    <Build Include="fipe\Stored Procedures\SP_ODS_DADOS_MODELO.sql" />
+    <Build Include="fipe\Tables\DIM_MODELO.sql" />
+    <Build Include="fipe\Tables\DIM_TIPO_MODELO.sql" />
+    <Build Include="Security\fipe_dw.sql" />
+    <Build Include="fipe\Tables\DIM_TIPO_COMBUSTIVEL.sql" />
+    <Build Include="fipe\Tables\DIM_TEMPO_MENSAL.sql" />
+    <Build Include="fipe\Tables\FTO_DADOS_MODELO.sql" />
   </ItemGroup>
 </Project>

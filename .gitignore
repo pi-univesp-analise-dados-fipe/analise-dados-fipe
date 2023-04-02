@@ -194,3 +194,4 @@ fabric.properties
 *.cache
 *.dbmdl
 FIPE-DW-SQL/.vs/FIPE-DW-SQL/v16/.suo
+*.jfm

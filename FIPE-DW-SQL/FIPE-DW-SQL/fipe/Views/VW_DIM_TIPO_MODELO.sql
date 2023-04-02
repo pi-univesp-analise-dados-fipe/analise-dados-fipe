@@ -1,0 +1,7 @@
+﻿CREATE VIEW fipe_dw.VW_DIM_TIPO_MODELO AS 
+	SELECT COD_TIPO_MODELO, NME_TIPO_MODELO  
+		FROM (
+				VALUES	(1, 'Carro'), 
+						(2, 'Moto'), 
+						(3, 'Caminhão')
+			) as DIM_TIPO_MODELO (COD_TIPO_MODELO, NME_TIPO_MODELO )

@@ -1,0 +1,3 @@
+﻿CREATE SCHEMA [fipe]
+    AUTHORIZATION [dbo];
+
