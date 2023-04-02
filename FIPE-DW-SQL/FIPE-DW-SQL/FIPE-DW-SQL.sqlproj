@@ -82,7 +82,6 @@
     <Build Include="fipe_dw\Stored Procedures\SP_ODS_MES_REFERENCIA.sql" />
     <Build Include="fipe_dw\Stored Procedures\SP_ODS_DADOS_MODELO.sql" />
     <Build Include="fipe_dw\Tables\DW_DIM_MODELO.sql" />
-    <Build Include="fipe_dw\Tables\DW_DIM_TIPO_MODELO.sql" />
     <Build Include="Security\fipe_dw.sql" />
     <Build Include="fipe_dw\Tables\DW_DIM_TIPO_COMBUSTIVEL.sql" />
     <Build Include="fipe_dw\Tables\DW_DIM_TEMPO_MENSAL.sql" />
