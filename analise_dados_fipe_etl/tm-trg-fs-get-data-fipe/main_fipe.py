@@ -180,9 +180,11 @@ def get_amostra_dados_todos_modelos(tamanhoAmostra, tipoVeiculo, verbose):
     return listaDadosModelo
 
 
-def get_dados_todos_modelos(tipoVeiculo, verbose, qtdAnosRetroativos):
+def get_dados_todos_modelos(tipoVeiculo, qtdAnosRetroativos, codigoMesReferencia, verbose):
     modelos = get_todos_modelos(tipoVeiculo)
     listaDadosModelo = list()
+    if (codigoMesReferencia is None):
+        codigoMesReferencia = getMaxReferencia()
     i = 0
     if (qtdAnosRetroativos is not None):
         anoInicio = get_ano_atual() - qtdAnosRetroativos
@@ -190,7 +192,7 @@ def get_dados_todos_modelos(tipoVeiculo, verbose, qtdAnosRetroativos):
         if(verbose):
             print(f"Lendo dados de modelo {i + 1} de {len(modelos)}. Tipo de veiculo: {tipoVeiculo.name}. Modelo: {modelo}")
         codigoTipoVeiculo = int(modelo["codigoTipoVeiculo"])
-        codigoMesReferencia = int(modelo["codigoMesReferencia"])
+        #codigoMesReferencia = int(modelo["codigoMesReferencia"]) #o mes de referencia vem por parametro
         codigoMarca = int(modelo["codigoMarca"])
         codigoModelo = int(modelo["codigoModelo"])
         anosModelo = get_anos_modelo(codigoTipoVeiculo=codigoTipoVeiculo,
@@ -258,7 +260,7 @@ if __name__ == '__main__':
     #print(f"Salva a lista de modelos: {datetime.now()}")
 
     #dados = get_amostra_dados_todos_modelos(tamanhoAmostra=tamanho_amostra, verbose=True)
-    dados = get_dados_todos_modelos(tipoVeiculo=TipoVeiculoFipe.carro, verbose=True, qtdAnosRetroativos=15)
+    dados = get_dados_todos_modelos(tipoVeiculo=TipoVeiculoFipe.carro, verbose=True, qtdAnosRetroativos=15, codigoMesReferencia=295)
     save_json_dados_todos_modelos(dadosModelo=dados,  tipoVeiculo=TipoVeiculoFipe.carro,flgAmostra=False)
     print(f"Salvo os dados dos modelos: {datetime.datetime.now()}")
 
