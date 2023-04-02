@@ -530,6 +530,10 @@ FodyWeavers.xsd
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,visualstudio,pycharm
 
-FIPE-DW-SQL\FIPE-DW-SQL\obj
 
-analise_dados_fipe_etl\.idea
+analise_dados_fipe_etl/.idea
+FIPE-DW-SQL/FIPE-DW-SQL/obj
+FIPE-DW-SQL/FIPE-DW-SQL/obj/Debug
+FIPE-DW-SQL/FIPE-DW-SQL/obj/Debug/FIPE-DW-SQL.sqlproj.FileListAbsolute.txt
+FIPE-DW-SQL/FIPE-DW-SQL/obj/Debug/FIPE_DW_SQL.dll
+FIPE-DW-SQL/FIPE-DW-SQL/obj/Debug/FIPE_DW_SQL.pdb
