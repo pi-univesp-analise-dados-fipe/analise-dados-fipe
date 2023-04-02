@@ -13,7 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "amostra_dados_modelo.json",
+				"fileName": "dados_modelo_carro.json",
 				"folderPath": "historico_modelo",
 				"container": "fipe-data"
 			}
