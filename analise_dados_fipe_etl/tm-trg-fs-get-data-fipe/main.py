@@ -30,13 +30,19 @@ def save_json_periodo_referencia():
     data = get_periodo_referencia()
     save_file_json(data, "dados_referencia", False)
 
-def get_marcas_por_tipo(tipo_veiculo, mesReferencia ):
-    url_marca = f"{urlBaseAPI}/{endpoint_marcas}?codigoTipoVeiculo={tipo_veiculo}&codigoTabelaReferencia={mesReferencia}"
+def get_marcas_por_tipo(codigoTipoVeiculo, codigoMesReferencia):
+    url_marca = f"{urlBaseAPI}/{endpoint_marcas}?codigoTipoVeiculo={codigoTipoVeiculo}&codigoTabelaReferencia={codigoMesReferencia}"
     response = requests.post(url_marca)
+    #listaMarcas = list()
     marcas = response.json()
     for marca in marcas:
-        marca["codigoTipoVeiculo"] = tipo_veiculo
-        marca["mesReferencia"] = mesReferencia
+        marca["codigoMarca"] = int(marca["Value"])
+        marca["nomeMarca"] = marca["Label"]
+        marca["codigoTipoVeiculo"] = codigoTipoVeiculo
+        marca["codigoMesReferencia"] = codigoMesReferencia
+        del marca["Value"]
+        del marca["Label"]
+        #   listaMarcas.append(marca)
     return marcas
 
 def save_json_todas_marcas():
@@ -44,8 +50,11 @@ def save_json_todas_marcas():
     listaMarcas = list()
     for tipo in TipoVeiculoFipe:
         marcas = get_marcas_por_tipo(tipo.value, maxReferencia)
-        listaMarcas.append(marcas)
+        for marca in marcas:
+            listaMarcas.append(marca)
+    #    print(marcas)
     #save_file_json(listaMarcas, f"marcas/marcas_{tipo.name}", False)
+    #print(listaMarcas)
     save_file_json(listaMarcas, f"marcas/marcas", False)
 
 
@@ -56,9 +65,13 @@ def get_modelos_por_marca(codigoTipoVeiculo, codigoMesReferencia, codigoMarca):
     dados_modelo["CodigoMarca"] = codigoMarca
     modelos = dados_modelo["Modelos"]
     for modelo in modelos:
+        modelo["codigoModelo"] = modelo["Value"]
+        modelo["nomeModelo"] = modelo["Label"]
         modelo["codigoTipoVeiculo"] = codigoTipoVeiculo
         modelo["codigoMesReferencia"] = codigoMesReferencia
         modelo["codigoMarca"] = codigoMarca
+        del modelo["Value"]
+        del modelo["Label"]
     return modelos
 
 def get_todos_modelos():
@@ -68,10 +81,22 @@ def get_todos_modelos():
         marcas = get_marcas_por_tipo(tipo.value, maxReferencia)
         for marca in marcas:
             modelos = get_modelos_por_marca(codigoTipoVeiculo=tipo.value, codigoMesReferencia=maxReferencia,
-                                            codigoMarca=int(marca["Value"]))
+                                            codigoMarca=int(marca["codigoMarca"]))
             for modelo in modelos:
                 listaModelos.append(modelo)
     return listaModelos
+
+def get_todos_modelos(tipoVeiculo):
+    maxReferencia = getMaxReferencia()
+    listaModelos = list()
+    marcas = get_marcas_por_tipo(tipoVeiculo.value, maxReferencia)
+    for marca in marcas:
+        modelos = get_modelos_por_marca(codigoTipoVeiculo=tipoVeiculo.value, codigoMesReferencia=maxReferencia,
+                                            codigoMarca=int(marca["codigoMarca"]))
+        for modelo in modelos:
+                listaModelos.append(modelo)
+    return listaModelos
+
 
 def save_json_todos_modelos(listaModelos):
     save_file_json(listaModelos, f"modelos/modelos", False)
@@ -114,16 +139,23 @@ def get_anos_modelo(codigoTipoVeiculo, codMesReferencia, codigoMarca, codigoMode
     anosModelo = response.json()
     return anosModelo
 
+def get_ano_atual():
+    return datetime.date.today().year
 
+def get_data_atual():
+    return datetime.date.today()
 
-def get_dados_todos_modelos():
-    modelos = get_todos_modelos()
+def get_amostra_dados_todos_modelos(tamanhoAmostra, tipoVeiculo, verbose):
+    modelos = get_todos_modelos(tipoVeiculo)
     listaDadosModelo = list()
+    i = 0
     for modelo in modelos:
+        if (verbose):
+            print(f"Lendo dados de amostra do modelo {i + 1} de {tamanhoAmostra}. Tipo de veiculo: {tipoVeiculo.name}. Modelo: {modelo}")
         codigoTipoVeiculo = int(modelo["codigoTipoVeiculo"])
         codigoMesReferencia = int(modelo["codigoMesReferencia"])
         codigoMarca = int(modelo["codigoMarca"])
-        codigoModelo = int(modelo["Value"])
+        codigoModelo = int(modelo["codigoModelo"])
         anosModelo = get_anos_modelo(codigoTipoVeiculo=codigoTipoVeiculo,
                                     codMesReferencia=codigoMesReferencia,
                                     codigoMarca=codigoMarca,
@@ -131,12 +163,63 @@ def get_dados_todos_modelos():
                                     )
         #codTipoVeiculo, codMesReferencia, codigoMarca, codigoModelo
         for anoModelo in anosModelo:
-            anoModelo["ano"] = numAnoModelo = anoModelo['Label'].split()[0]
-            anoModelo["combustivel"] = anoModelo['Label'].split()[1]
-            codigoTipoCombustivel = int(get_codigo_tipo_combustivel(anoModelo['Label'].split()[1]))
+            if len(anoModelo['Label']) >= 2:
+                anoModelo["ano"] = numAnoModelo = anoModelo['Label'].split()[0]
+                anoModelo["combustivel"] = anoModelo['Label'].split()[1]
+                codigoTipoCombustivel = int(get_codigo_tipo_combustivel(anoModelo['Label'].split()[1]))
+            else:
+                numAnoModelo = get_ano_atual()
+                codigoTipoCombustivel = 1
+            dados_modelo = get_dados_modelo(codigoTipoVeiculo, codigoMesReferencia, codigoMarca, codigoModelo, numAnoModelo,
+                                     codigoTipoCombustivel)
+            if ("codigo" not in dados_modelo):
+                listaDadosModelo.append(dados_modelo)
+        i = i + 1
+        if (i >= tamanhoAmostra):
+            break
+    return listaDadosModelo
+
+
+def get_dados_todos_modelos(tipoVeiculo, verbose, qtdAnosRetroativos):
+    modelos = get_todos_modelos(tipoVeiculo)
+    listaDadosModelo = list()
+    i = 0
+    if (qtdAnosRetroativos is not None):
+        anoInicio = get_ano_atual() - qtdAnosRetroativos
+    for modelo in modelos:
+        if(verbose):
+            print(f"Lendo dados de modelo {i + 1} de {len(modelos)}. Tipo de veiculo: {tipoVeiculo.name}. Modelo: {modelo}")
+        codigoTipoVeiculo = int(modelo["codigoTipoVeiculo"])
+        codigoMesReferencia = int(modelo["codigoMesReferencia"])
+        codigoMarca = int(modelo["codigoMarca"])
+        codigoModelo = int(modelo["codigoModelo"])
+        anosModelo = get_anos_modelo(codigoTipoVeiculo=codigoTipoVeiculo,
+                                    codMesReferencia=codigoMesReferencia,
+                                    codigoMarca=codigoMarca,
+                                    codigoModelo=codigoModelo
+                                    )
+
+        #codTipoVeiculo, codMesReferencia, codigoMarca, codigoModelo
+
+        for anoModelo in anosModelo:
+
+            if (tipoVeiculo.value == 1): #carro
+                anoModelo["ano"] = numAnoModelo = int(anoModelo['Label'].split()[0])
+                anoModelo["combustivel"] = anoModelo['Label'].split()[1]
+                codigoTipoCombustivel = int(get_codigo_tipo_combustivel(anoModelo['Label'].split()[1]))
+            elif (tipoVeiculo.value == 2): #moto:
+                anoModelo["ano"] = numAnoModelo = int(anoModelo['Label'])
+                codigoTipoCombustivel = 1
+            elif (tipoVeiculo.value == 3): #caminhão
+                anoModelo["ano"] = numAnoModelo = int(anoModelo['Label'])
+                codigoTipoCombustivel = 3
+            if (qtdAnosRetroativos is not None):
+                if (numAnoModelo < anoInicio ):
+                    break
             dados_modelo = get_dados_modelo(codigoTipoVeiculo, codigoMesReferencia, codigoMarca, codigoModelo, numAnoModelo,
                                      codigoTipoCombustivel)
             listaDadosModelo.append(dados_modelo)
+        i = i + 1
     return listaDadosModelo
 
 
@@ -149,16 +232,18 @@ def get_codigo_tipo_combustivel(tipoCombustivel):
         }.get(tipoCombustivel, 0)
 
 
-def save_json_dados_todos_modelos(dadosModelo):
-    save_file_json(dadosModelo, f"modelos/modelos_anos", False)
-
+def save_json_dados_todos_modelos(dadosModelo, tipoVeiculo, flgAmostra):
+    if (flgAmostra):
+        save_file_json(dadosModelo, f"modelos/amostra_dados_modelo_{tipoVeiculo.name}_{len(dadosModelo)}", False)
+    else:
+        save_file_json(dadosModelo, f"modelos/dados_modelo_{tipoVeiculo.name}", False)
 
 if __name__ == '__main__':
 
     #save_json_todos_modelos()
     # Chamada 2 - Get Marcas - salva todas as marcas em arquivos json
     #maxReferencia = getMaxReferencia()
-
+    #print(getMaxReferencia())
 
     #  print(get_modelos_por_marca(1, 295,  1))
     # def get_ano_modelo(tipoVeiculo, mesReferencia, codigoTipoVeiculo, codigoMarca, codigoModelo):
@@ -167,7 +252,14 @@ if __name__ == '__main__':
     #save_json_periodo_referencia()
     #save_json_todas_marcas()
     #save_json_todas_marcas()
-    save_json_todos_modelos(get_todos_modelos())
-    save_json_dados_todos_modelos(get_dados_todos_modelos())
+    print(f"Início de execucao: {datetime.datetime.now()}")
+
+    #save_json_todos_modelos(get_todos_modelos())
+    #print(f"Salva a lista de modelos: {datetime.now()}")
+    tamanho_amostra = 2000
+    #dados = get_amostra_dados_todos_modelos(tamanhoAmostra=tamanho_amostra, verbose=True)
+    dados = get_dados_todos_modelos(tipoVeiculo=TipoVeiculoFipe.carro, verbose=True, qtdAnosRetroativos=15)
+    save_json_dados_todos_modelos(dadosModelo=dados,  tipoVeiculo=TipoVeiculoFipe.carro,flgAmostra=False)
+    print(f"Salvo os dados dos modelos: {datetime.datetime.now()}")
 
 
