@@ -57,28 +57,10 @@
 							},
 							{
 								"source": {
-									"path": "$['Combustivel']"
-								},
-								"sink": {
-									"name": "NME_TIPO_COMBUSTIVEL",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
 									"path": "$['CodigoFipe']"
 								},
 								"sink": {
 									"name": "COD_FIPE",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['SiglaCombustivel']"
-								},
-								"sink": {
-									"name": "SGL_COMBUSTIVEL",
 									"type": "String"
 								}
 							},
@@ -205,28 +187,10 @@
 							},
 							{
 								"source": {
-									"path": "$['Combustivel']"
-								},
-								"sink": {
-									"name": "NME_TIPO_COMBUSTIVEL",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
 									"path": "$['CodigoFipe']"
 								},
 								"sink": {
 									"name": "COD_FIPE",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['SiglaCombustivel']"
-								},
-								"sink": {
-									"name": "SGL_COMBUSTIVEL",
 									"type": "String"
 								}
 							},
@@ -353,28 +317,10 @@
 							},
 							{
 								"source": {
-									"path": "$['Combustivel']"
-								},
-								"sink": {
-									"name": "NME_TIPO_COMBUSTIVEL",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
 									"path": "$['CodigoFipe']"
 								},
 								"sink": {
 									"name": "COD_FIPE",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['SiglaCombustivel']"
-								},
-								"sink": {
-									"name": "SGL_COMBUSTIVEL",
 									"type": "String"
 								}
 							},
