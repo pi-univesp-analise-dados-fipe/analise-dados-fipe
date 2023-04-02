@@ -56,7 +56,7 @@
 			}
 		],
 		"typeProperties": {
-			"schema": "fipe",
+			"schema": "fipe_stg",
 			"table": "STG_DADOS_MODELO"
 		}
 	},
