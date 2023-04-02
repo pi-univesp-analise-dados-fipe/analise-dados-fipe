@@ -50,14 +50,6 @@
 				"type": "varchar"
 			},
 			{
-				"name": "SGL_COMBUSTIVEL",
-				"type": "varchar"
-			},
-			{
-				"name": "NME_TIPO_COMBUSTIVEL",
-				"type": "varchar"
-			},
-			{
 				"name": "DTA_INCLUSAO",
 				"type": "datetime2",
 				"scale": 2
