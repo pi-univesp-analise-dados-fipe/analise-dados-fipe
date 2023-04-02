@@ -27,7 +27,7 @@
 			}
 		],
 		"typeProperties": {
-			"schema": "fipe",
+			"schema": "fipe_stg",
 			"table": "STG_MES_REFERENCIA"
 		}
 	},
