@@ -46,11 +46,45 @@
 										"type": "JsonReadSettings"
 									}
 								},
-								"enableStaging": false
+								"sink": {
+									"type": "AzureSqlSink",
+									"writeBehavior": "insert",
+									"sqlWriterUseTableLock": false
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"mappings": [
+										{
+											"source": {
+												"path": "$['Label']"
+											},
+											"sink": {
+												"name": "NME_MARCA",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "$['Value']"
+											},
+											"sink": {
+												"name": "COD_MARCA",
+												"type": "Int32"
+											}
+										}
+									]
+								}
 							},
 							"inputs": [
 								{
 									"referenceName": "JSON_FIPE_MARCA",
+									"type": "DatasetReference"
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ADS_FIPE_STG_MARCA",
 									"type": "DatasetReference"
 								}
 							]
