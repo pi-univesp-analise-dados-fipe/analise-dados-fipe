@@ -1,7 +1,6 @@
 import requests
 import datetime
 import logging
-from azure.storage.blob import BlobServiceClient, BlobClient
 import json
 import datetime
 
@@ -21,7 +20,11 @@ endpointAnoModelo = "ConsultarAnoModelo"
 def get_periodo_referencia():
     url_ref = f"{urlBaseAPI}/{endpoint_referencia}"
     response = requests.post(url_ref)
-    return response.json()
+    try:
+        dados = response.json()
+    except JSONDecodeError:
+        print(f"Erro ao processar requisição.  Modelo: {url_ref}")
+    return dados
 
 
 def getMaxReferencia():
@@ -39,7 +42,11 @@ def get_marcas_por_tipo(codigoTipoVeiculo, codigoMesReferencia):
     url_marca = f"{urlBaseAPI}/{endpoint_marcas}?codigoTipoVeiculo={codigoTipoVeiculo}&codigoTabelaReferencia={codigoMesReferencia}"
     response = requests.post(url_marca)
     #listaMarcas = list()
-    marcas = response.json()
+    lista_dados_modelo = list()
+    try:
+        marcas = response.json()
+    except JSONDecodeError:
+        print(f"Erro ao processar requisição.  Modelo: {url_marca}")
     for marca in marcas:
         marca["codigoMarca"] = int(marca["Value"])
         marca["nomeMarca"] = marca["Label"]
@@ -67,7 +74,10 @@ def save_json_todas_marcas():
 def get_modelos_por_marca(codigoTipoVeiculo, codigoMesReferencia, codigoMarca):
     urlModelo = f"{urlBaseAPI}/{endpoint_modelos}?codigoTipoVeiculo={codigoTipoVeiculo}&codigoTabelaReferencia={codigoMesReferencia}&codigoMarca={codigoMarca}"
     response = requests.post(urlModelo)
-    dados_modelo = response.json()
+    try:
+        dados_modelo = response.json()
+    except JSONDecodeError:
+        print(f"Erro ao processar requisição.  Modelo: {urlModelo}")
     dados_modelo["CodigoMarca"] = codigoMarca
     modelos = dados_modelo["Modelos"]
     for modelo in modelos:
@@ -130,7 +140,10 @@ def get_dados_modelo(codigoTipoVeiculo, codigoMesReferencia, codigoMarca, codigo
                         f"codigoTipoCombustivel={codigoTipoCombustivel}&tipoConsulta={tipoConsulta}"
     response = requests.post(urlDadosModelo)
     lista_dados_modelo = list()
-    dados_modelo = response.json()
+    try:
+        dados_modelo = response.json()
+    except JSONDecodeError:
+        print(f"Erro ao processar requisição.  Modelo: {urlDadosModelo}")
     dados_modelo["codigoTipoVeiculo"] = codigoTipoVeiculo
     dados_modelo["codigoMesReferencia"] = codigoMesReferencia
     dados_modelo["codigoMarca"] = codigoMarca
@@ -145,7 +158,10 @@ def get_anos_modelo(codigoTipoVeiculo, codMesReferencia, codigoMarca, codigoMode
                 f"codigoMarca={codigoMarca}&" \
                 f"codigoModelo={codigoModelo}"
     response = requests.post(urlModelo)
-    anosModelo = response.json()
+    try:
+        anosModelo = response.json()
+    except JSONDecodeError:
+        print(f"Erro ao processar requisição.  Modelo: {urlModelo}")
     return anosModelo
 
 def get_ano_atual():
@@ -221,14 +237,24 @@ def get_dados_todos_modelos(tipoVeiculo, qtdAnosRetroativos, codigoMesReferencia
         for anoModelo in anosModelo:
 
             if (tipoVeiculo.value == 1): #carro
-                anoModelo["ano"] = numAnoModelo = int(anoModelo['Label'].split()[0])
-                anoModelo["combustivel"] = anoModelo['Label'].split()[1]
-                codigoTipoCombustivel = int(get_codigo_tipo_combustivel(anoModelo['Label'].split()[1]))
+                if ('Label' in anoModelo):
+                    anoModelo["ano"] = numAnoModelo = int(anoModelo['Label'].split()[0])
+                    anoModelo["combustivel"] = anoModelo['Label'].split()[1]
+                    codigoTipoCombustivel = int(get_codigo_tipo_combustivel(anoModelo['Label'].split()[1]))
+                else:
+                    anoModelo["ano"] = numAnoModelo = get_ano_atual()
+                    codigoTipoCombustivel = 1
             elif (tipoVeiculo.value == 2): #moto:
-                anoModelo["ano"] = numAnoModelo = int(anoModelo['Label'])
+                if ('Label' in anoModelo):
+                    anoModelo["ano"] = numAnoModelo = int(anoModelo['Label'])
+                else:
+                    anoModelo["ano"] = numAnoModelo = get_ano_atual()
                 codigoTipoCombustivel = 1
             elif (tipoVeiculo.value == 3): #caminhão
-                anoModelo["ano"] = numAnoModelo = int(anoModelo['Label'])
+                if ('Label' in anoModelo):
+                    anoModelo["ano"] = numAnoModelo = int(anoModelo['Label'])
+                else:
+                    anoModelo["ano"] = numAnoModelo = get_ano_atual()
                 codigoTipoCombustivel = 3
             if (qtdAnosRetroativos is not None):
                 if (numAnoModelo < anoInicio ):
@@ -275,8 +301,8 @@ if __name__ == '__main__':
     #print(f"Salva a lista de modelos: {datetime.now()}")
 
     #dados = get_amostra_dados_todos_modelos(tamanhoAmostra=tamanho_amostra, verbose=True)
-    codigoMesReferencia = 295
-    tipoVeiculo = TipoVeiculoFipe.caminhao
+    codigoMesReferencia = 287
+    tipoVeiculo = TipoVeiculoFipe.moto
     dados = get_dados_todos_modelos(tipoVeiculo=tipoVeiculo, verbose=True, qtdAnosRetroativos=15, codigoMesReferencia=codigoMesReferencia)
     save_json_dados_todos_modelos(dadosModelo=dados,  tipoVeiculo=tipoVeiculo,flgAmostra=False, codigoMesReferencia=codigoMesReferencia)
     print(f"Salvo os dados dos modelos: {datetime.datetime.now()}")
