@@ -4,6 +4,9 @@ import logging
 from azure.storage.blob import BlobServiceClient, BlobClient
 import json
 import datetime
+
+from requests import JSONDecodeError
+
 from tipo_veiculo_fipe import TipoVeiculoFipe
 from operator import itemgetter
 
@@ -176,8 +179,12 @@ def get_amostra_dados_todos_modelos(tamanhoAmostra, tipoVeiculo, verbose):
             else:
                 numAnoModelo = get_ano_atual()
                 codigoTipoCombustivel = 1
-            dados_modelo = get_dados_modelo(codigoTipoVeiculo, codigoMesReferencia, codigoMarca, codigoModelo, numAnoModelo,
+            try:
+                dados_modelo = get_dados_modelo(codigoTipoVeiculo, codigoMesReferencia, codigoMarca, codigoModelo, numAnoModelo,
                                      codigoTipoCombustivel)
+            except JSONDecodeError:
+                print(f"Erro ao processar requisição.  Modelo: {modelo}")
+                break
             if ("codigo" not in dados_modelo):
                 listaDadosModelo.append(dados_modelo)
         i = i + 1
@@ -268,8 +275,10 @@ if __name__ == '__main__':
     #print(f"Salva a lista de modelos: {datetime.now()}")
 
     #dados = get_amostra_dados_todos_modelos(tamanhoAmostra=tamanho_amostra, verbose=True)
-    dados = get_dados_todos_modelos(tipoVeiculo=TipoVeiculoFipe.carro, verbose=True, qtdAnosRetroativos=15, codigoMesReferencia=295)
-    save_json_dados_todos_modelos(dadosModelo=dados,  tipoVeiculo=TipoVeiculoFipe.carro,flgAmostra=False)
+    codigoMesReferencia = 295
+    tipoVeiculo = TipoVeiculoFipe.caminhao
+    dados = get_dados_todos_modelos(tipoVeiculo=tipoVeiculo, verbose=True, qtdAnosRetroativos=15, codigoMesReferencia=codigoMesReferencia)
+    save_json_dados_todos_modelos(dadosModelo=dados,  tipoVeiculo=tipoVeiculo,flgAmostra=False, codigoMesReferencia=codigoMesReferencia)
     print(f"Salvo os dados dos modelos: {datetime.datetime.now()}")
 
 
