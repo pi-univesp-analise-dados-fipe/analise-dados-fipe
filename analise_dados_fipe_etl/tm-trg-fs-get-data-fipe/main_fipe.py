@@ -14,10 +14,12 @@ endpoint_referencia = "ConsultarTabelaDeReferencia"
 endpointDadosModelo = "ConsultarValorComTodosParametros"
 endpointAnoModelo = "ConsultarAnoModelo"
 
+
 def get_periodo_referencia():
     url_ref = f"{urlBaseAPI}/{endpoint_referencia}"
     response = requests.post(url_ref)
     return response.json()
+
 
 def getMaxReferencia():
     listaReferencia = get_periodo_referencia()
@@ -44,6 +46,7 @@ def get_marcas_por_tipo(codigoTipoVeiculo, codigoMesReferencia):
         del marca["Label"]
         #   listaMarcas.append(marca)
     return marcas
+
 
 def save_json_todas_marcas():
     maxReferencia = getMaxReferencia()
@@ -86,12 +89,13 @@ def get_todos_modelos():
                 listaModelos.append(modelo)
     return listaModelos
 
-def get_todos_modelos(tipoVeiculo):
-    maxReferencia = getMaxReferencia()
+def get_todos_modelos(tipoVeiculo, codigoMesReferencia):
+    if (codigoMesReferencia is None):
+        codigoMesReferencia = getMaxReferencia()
     listaModelos = list()
-    marcas = get_marcas_por_tipo(tipoVeiculo.value, maxReferencia)
+    marcas = get_marcas_por_tipo(tipoVeiculo.value, codigoMesReferencia)
     for marca in marcas:
-        modelos = get_modelos_por_marca(codigoTipoVeiculo=tipoVeiculo.value, codigoMesReferencia=maxReferencia,
+        modelos = get_modelos_por_marca(codigoTipoVeiculo=tipoVeiculo.value, codigoMesReferencia=codigoMesReferencia,
                                             codigoMarca=int(marca["codigoMarca"]))
         for modelo in modelos:
                 listaModelos.append(modelo)
@@ -101,6 +105,7 @@ def get_todos_modelos(tipoVeiculo):
 def save_json_todos_modelos(listaModelos):
     save_file_json(listaModelos, f"modelos/modelos", False)
 
+
 def save_file_json(data, filename, dated):
     if dated:
         now = datetime.datetime.now()
@@ -109,6 +114,7 @@ def save_file_json(data, filename, dated):
         file_name = f"json/fipe/{filename}.json"
     with open(file_name, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False)
+
 
 def get_dados_modelo(codigoTipoVeiculo, codigoMesReferencia, codigoMarca, codigoModelo, anoModelo, codigoTipoCombustivel):
     tipoConsulta = "tradicional"
@@ -181,7 +187,7 @@ def get_amostra_dados_todos_modelos(tamanhoAmostra, tipoVeiculo, verbose):
 
 
 def get_dados_todos_modelos(tipoVeiculo, qtdAnosRetroativos, codigoMesReferencia, verbose):
-    modelos = get_todos_modelos(tipoVeiculo)
+    modelos = get_todos_modelos(tipoVeiculo, codigoMesReferencia)
     listaDadosModelo = list()
     if (codigoMesReferencia is None):
         codigoMesReferencia = getMaxReferencia()
@@ -190,9 +196,11 @@ def get_dados_todos_modelos(tipoVeiculo, qtdAnosRetroativos, codigoMesReferencia
         anoInicio = get_ano_atual() - qtdAnosRetroativos
     for modelo in modelos:
         if(verbose):
-            print(f"Lendo dados de modelo {i + 1} de {len(modelos)}. Tipo de veiculo: {tipoVeiculo.name}. Modelo: {modelo}")
+            print(f"Lendo dados de modelo {i + 1} de {len(modelos)}. Codigo Mês Referência: {codigoMesReferencia} "
+                  f"Tipo de veiculo: {tipoVeiculo.name}. Modelo: {modelo}")
         codigoTipoVeiculo = int(modelo["codigoTipoVeiculo"])
         #codigoMesReferencia = int(modelo["codigoMesReferencia"]) #o mes de referencia vem por parametro
+        modelo["codigoMesReferencia"] = codigoMesReferencia
         codigoMarca = int(modelo["codigoMarca"])
         codigoModelo = int(modelo["codigoModelo"])
         anosModelo = get_anos_modelo(codigoTipoVeiculo=codigoTipoVeiculo,
@@ -234,11 +242,11 @@ def get_codigo_tipo_combustivel(tipoCombustivel):
         }.get(tipoCombustivel, 0)
 
 
-def save_json_dados_todos_modelos(dadosModelo, tipoVeiculo, flgAmostra):
+def save_json_dados_todos_modelos(dadosModelo, tipoVeiculo, flgAmostra, codigoMesReferencia):
     if (flgAmostra):
-        save_file_json(dadosModelo, f"modelos/amostra_dados_modelo_{tipoVeiculo.name}_{len(dadosModelo)}", False)
+        save_file_json(dadosModelo, f"modelos/amostra_dados_modelo_{tipoVeiculo.name}_{len(dadosModelo)}_{codigoMesReferencia}", False)
     else:
-        save_file_json(dadosModelo, f"modelos/dados_modelo_{tipoVeiculo.name}", False)
+        save_file_json(dadosModelo, f"modelos/dados_modelo_{tipoVeiculo.name}_{codigoMesReferencia}", False)
 
 if __name__ == '__main__':
 

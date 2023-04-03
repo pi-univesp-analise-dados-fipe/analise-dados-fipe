@@ -1,0 +1,429 @@
+{
+	"info": {
+		"_postman_id": "0cb6269c-6807-4616-9984-0c47ca834a7e",
+		"name": "tabela fipe carro",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Consulta Referencia",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "referer",
+							"value": "https://precodeveiculo.netlify.app/",
+							"type": "default",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "default",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "https://veiculos.fipe.org.br/api/veiculos/ConsultarTabelaDeReferencia",
+					"protocol": "https",
+					"host": [
+						"veiculos",
+						"fipe",
+						"org",
+						"br"
+					],
+					"path": [
+						"api",
+						"veiculos",
+						"ConsultarTabelaDeReferencia"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar Marcas",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "referere",
+							"value": "https://precodeveiculo.netlify.app/",
+							"type": "default",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "default",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "https://veiculos.fipe.org.br/api/veiculos/ConsultarMarcas?codigoTipoVeiculo=1&codigoTabelaReferencia=296",
+					"protocol": "https",
+					"host": [
+						"veiculos",
+						"fipe",
+						"org",
+						"br"
+					],
+					"path": [
+						"api",
+						"veiculos",
+						"ConsultarMarcas"
+					],
+					"query": [
+						{
+							"key": "codigoTipoVeiculo",
+							"value": "1"
+						},
+						{
+							"key": "codigoTabelaReferencia",
+							"value": "296"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar Modelos",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "referere",
+							"value": "https://precodeveiculo.netlify.app/",
+							"type": "default"
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://veiculos.fipe.org.br/api/veiculos/ConsultarModelos?codigoTabelaReferencia=295&codigoTipoVeiculo=1&codigoMarca=5",
+					"protocol": "https",
+					"host": [
+						"veiculos",
+						"fipe",
+						"org",
+						"br"
+					],
+					"path": [
+						"api",
+						"veiculos",
+						"ConsultarModelos"
+					],
+					"query": [
+						{
+							"key": "codigoTabelaReferencia",
+							"value": "295"
+						},
+						{
+							"key": "codigoTipoVeiculo",
+							"value": "1"
+						},
+						{
+							"key": "codigoMarca",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar Ano Modelo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "referere",
+							"value": "https://precodeveiculo.netlify.app/",
+							"type": "default"
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://veiculos.fipe.org.br/api/veiculos/ConsultarAnoModelo?codigoTabelaReferencia=295&codigoTipoVeiculo=1&codigoMarca=5&codigoModelo=25",
+					"protocol": "https",
+					"host": [
+						"veiculos",
+						"fipe",
+						"org",
+						"br"
+					],
+					"path": [
+						"api",
+						"veiculos",
+						"ConsultarAnoModelo"
+					],
+					"query": [
+						{
+							"key": "codigoTabelaReferencia",
+							"value": "295"
+						},
+						{
+							"key": "codigoTipoVeiculo",
+							"value": "1"
+						},
+						{
+							"key": "codigoMarca",
+							"value": "5"
+						},
+						{
+							"key": "codigoModelo",
+							"value": "25"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar Valor com Todos os Parametros",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "referere",
+							"value": "https://precodeveiculo.netlify.app/",
+							"type": "default"
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://veiculos.fipe.org.br/api/veiculos/ConsultarValorComTodosParametros?codigoTabelaReferencia=295&codigoTipoVeiculo= 1&codigoMarca= 6&codigoModelo=7727&anoModelo= 2017&codigoTipoCombustivel=1&tipoConsulta= tradicional",
+					"protocol": "https",
+					"host": [
+						"veiculos",
+						"fipe",
+						"org",
+						"br"
+					],
+					"path": [
+						"api",
+						"veiculos",
+						"ConsultarValorComTodosParametros"
+					],
+					"query": [
+						{
+							"key": "codigoTabelaReferencia",
+							"value": "295"
+						},
+						{
+							"key": "codigoTipoVeiculo",
+							"value": " 1"
+						},
+						{
+							"key": "codigoMarca",
+							"value": " 6"
+						},
+						{
+							"key": "codigoModelo",
+							"value": "7727"
+						},
+						{
+							"key": "anoModelo",
+							"value": " 2017"
+						},
+						{
+							"key": "codigoTipoCombustivel",
+							"value": "1"
+						},
+						{
+							"key": "tipoConsulta",
+							"value": " tradicional"
+						},
+						{
+							"key": "ano",
+							"value": " 2017-1",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar Valor com Todos os Parametros Exemplo FIPE",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "codigoTabelaReferencia=295&codigoMarca=25&codigoModelo=4975&codigoTipoVeiculo=1&anoModelo=2021&codigoTipoCombustivel=1&tipoVeiculo=carro&modeloCodigoExterno=&tipoConsulta=tradicional",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://veiculos.fipe.org.br/api/veiculos/ConsultarValorComTodosParametros?codigoTabelaReferencia= 295&codigoMarca= 25&codigoModelo= 4975&codigoTipoVeiculo= 1&anoModelo= 2021&codigoTipoCombustivel= 1&tipoConsulta= tradicional",
+					"protocol": "https",
+					"host": [
+						"veiculos",
+						"fipe",
+						"org",
+						"br"
+					],
+					"path": [
+						"api",
+						"veiculos",
+						"ConsultarValorComTodosParametros"
+					],
+					"query": [
+						{
+							"key": "codigoTabelaReferencia",
+							"value": " 295"
+						},
+						{
+							"key": "codigoMarca",
+							"value": " 25"
+						},
+						{
+							"key": "codigoModelo",
+							"value": " 4975"
+						},
+						{
+							"key": "codigoTipoVeiculo",
+							"value": " 1"
+						},
+						{
+							"key": "anoModelo",
+							"value": " 2021"
+						},
+						{
+							"key": "codigoTipoCombustivel",
+							"value": " 1"
+						},
+						{
+							"key": "tipoVeiculo",
+							"value": " carro",
+							"disabled": true
+						},
+						{
+							"key": "modeloCodigoExterno",
+							"value": " ",
+							"disabled": true
+						},
+						{
+							"key": "tipoConsulta",
+							"value": " tradicional"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar Modelos Atraves Do Ano (não utilizar)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "referere",
+							"value": "https://precodeveiculo.netlify.app/",
+							"type": "default"
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://veiculos.fipe.org.br/api/veiculos/ConsultarModelosAtravesDoAno?codigoTabelaReferencia= 295&codigoTipoVeiculo= 1&codigoMarca= 6&anoModelo= 2017",
+					"protocol": "https",
+					"host": [
+						"veiculos",
+						"fipe",
+						"org",
+						"br"
+					],
+					"path": [
+						"api",
+						"veiculos",
+						"ConsultarModelosAtravesDoAno"
+					],
+					"query": [
+						{
+							"key": "codigoTabelaReferencia",
+							"value": " 295"
+						},
+						{
+							"key": "codigoTipoVeiculo",
+							"value": " 1"
+						},
+						{
+							"key": "codigoMarca",
+							"value": " 6"
+						},
+						{
+							"key": "anoModelo",
+							"value": " 2017"
+						},
+						{
+							"key": "codigoModelo",
+							"value": " 7727",
+							"disabled": true
+						},
+						{
+							"key": "ano",
+							"value": " 2017-1",
+							"disabled": true
+						},
+						{
+							"key": "codigoTipoCombustivel",
+							"value": " 1",
+							"disabled": true
+						},
+						{
+							"key": "tipoConsulta",
+							"value": " tradicional",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
