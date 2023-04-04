@@ -1,5 +1,5 @@
 {
-	"name": "CSV_TEST",
+	"name": "JSON_DADOS_MODELO_CAMINHAO_TGT",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ABS_FIPE_DATA",
