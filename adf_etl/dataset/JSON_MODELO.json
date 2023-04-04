@@ -13,8 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "modelos.json",
-				"folderPath": "modelo",
+				"folderPath": "data/modelo",
 				"container": "fipe-data"
 			}
 		},
