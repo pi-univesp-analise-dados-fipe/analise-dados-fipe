@@ -20,6 +20,8 @@
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": false,
+							"wildcardFolderPath": "dados/marca",
+							"wildcardFileName": "marcas_*.json",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
@@ -79,13 +81,95 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "JSON_MARCA",
+						"referenceName": "JSON_MARCA_SRC",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
 						"referenceName": "ADS_FIPE_STG_MARCA",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "MOVE JSON MARCA REFERENCIA",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "STG MARCA",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": false,
+							"wildcardFolderPath": "dados/marca",
+							"wildcardFileName": "marcas_*.json",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['codigoMarca']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['nomeMarca']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['codigoTipoVeiculo']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['codigoMesReferencia']"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "JSON_MARCA_SRC",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "JSON_MARCA_TGT",
 						"type": "DatasetReference"
 					}
 				]
