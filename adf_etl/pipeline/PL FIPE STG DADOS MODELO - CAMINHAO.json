@@ -162,14 +162,14 @@
 						}
 					},
 					"sink": {
-						"type": "JsonSink",
+						"type": "DelimitedTextSink",
 						"storeSettings": {
-							"type": "AzureBlobStorageWriteSettings",
-							"copyBehavior": "FlattenHierarchy"
+							"type": "AzureBlobStorageWriteSettings"
 						},
 						"formatSettings": {
-							"type": "JsonWriteSettings",
-							"filePattern": "setOfObjects"
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".json"
 						}
 					},
 					"enableStaging": false
@@ -182,7 +182,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "JSON_DADOS_MODELO_CAMINHAO_TGT",
+						"referenceName": "CSV_TEST",
 						"type": "DatasetReference"
 					}
 				]
