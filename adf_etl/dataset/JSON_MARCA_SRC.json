@@ -13,7 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"folderPath": "marca",
+				"folderPath": "dados/marca",
 				"container": "fipe-data"
 			}
 		},
