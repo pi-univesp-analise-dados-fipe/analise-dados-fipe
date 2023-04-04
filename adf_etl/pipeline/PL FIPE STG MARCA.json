@@ -145,7 +145,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "JSON_MARCA_TGT",
+						"referenceName": "JSON_MARCA_ARQ",
 						"type": "DatasetReference"
 					}
 				]
