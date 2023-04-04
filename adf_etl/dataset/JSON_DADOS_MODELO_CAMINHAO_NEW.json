@@ -1,0 +1,19 @@
+{
+	"name": "JSON_DADOS_MODELO_CAMINHAO_NEW",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ABS_FIPE_DATA",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "arquivo/dados_modelo/caminhao",
+				"container": "fipe-data"
+			}
+		},
+		"schema": {}
+	}
+}
