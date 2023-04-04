@@ -117,7 +117,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "JSON_DADOS_MODELO_CAMINHAO",
+						"referenceName": "JSON_DADOS_MODELO_CAMINHAO_SRC",
 						"type": "DatasetReference"
 					}
 				],
@@ -174,13 +174,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "JSON_DADOS_MODELO_CAMINHAO",
+						"referenceName": "JSON_DADOS_MODELO_CAMINHAO_SRC",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "JSON_DADOS_MODELO_CAMINHAO",
+						"referenceName": "JSON_DADOS_MODELO_CAMINHAO_TGT",
 						"type": "DatasetReference"
 					}
 				]
@@ -206,7 +206,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "JSON_DADOS_MODELO_CAMINHAO",
+						"referenceName": "JSON_DADOS_MODELO_CAMINHAO_SRC",
 						"type": "DatasetReference"
 					},
 					"logStorageSettings": {
