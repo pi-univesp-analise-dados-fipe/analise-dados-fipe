@@ -182,7 +182,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "CSV_TEST",
+						"referenceName": "JSON_DADOS_MODELO_CAMINHAO_TGT",
 						"type": "DatasetReference"
 					}
 				]
