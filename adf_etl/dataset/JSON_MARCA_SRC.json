@@ -1,5 +1,5 @@
 {
-	"name": "JSON_MARCA",
+	"name": "JSON_MARCA_SRC",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ABS_FIPE_DATA",
