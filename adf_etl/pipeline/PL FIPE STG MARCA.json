@@ -171,7 +171,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "JSON_MARCA_TGT",
+						"referenceName": "JSON_MARCA_SRC",
 						"type": "DatasetReference"
 					},
 					"logStorageSettings": {
@@ -184,7 +184,7 @@
 					"enableLogging": true,
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
-						"recursive": true,
+						"recursive": false,
 						"wildcardFileName": "marcas_*.json",
 						"enablePartitionDiscovery": false
 					}
