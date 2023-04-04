@@ -20,7 +20,7 @@
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": false,
-							"wildcardFolderPath": "dados/dados_modelo/caminhao",
+							"wildcardFolderPath": "dados/dados_modelo",
 							"wildcardFileName": "dados_modelo_caminhao_*.json",
 							"enablePartitionDiscovery": false
 						},
@@ -117,7 +117,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "JSON_DADOS_MODELO_CAMINHAO_SRC",
+						"referenceName": "JSON_DADOS_MODELO_SRC",
 						"type": "DatasetReference"
 					}
 				],
@@ -175,13 +175,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "JSON_DADOS_MODELO_CAMINHAO_SRC",
+						"referenceName": "JSON_DADOS_MODELO_SRC",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "JSON_DADOS_MODELO_CAMINHAO_NEW",
+						"referenceName": "JSON_DADOS_MODELO_ARQ",
 						"type": "DatasetReference"
 					}
 				]
@@ -207,7 +207,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "JSON_DADOS_MODELO_CAMINHAO_SRC",
+						"referenceName": "JSON_DADOS_MODELO_SRC",
 						"type": "DatasetReference"
 					},
 					"logStorageSettings": {
