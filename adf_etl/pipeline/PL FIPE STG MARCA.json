@@ -134,32 +134,7 @@
 							"type": "JsonWriteSettings"
 						}
 					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"mappings": [
-							{
-								"source": {
-									"path": "$['codigoMarca']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['nomeMarca']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['codigoTipoVeiculo']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['codigoMesReferencia']"
-								}
-							}
-						]
-					}
+					"enableStaging": false
 				},
 				"inputs": [
 					{
@@ -173,6 +148,46 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "DELETE JSON MARCA",
+				"type": "Delete",
+				"dependsOn": [
+					{
+						"activity": "MOVE JSON MARCA REFERENCIA",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "JSON_MARCA_TGT",
+						"type": "DatasetReference"
+					},
+					"logStorageSettings": {
+						"linkedServiceName": {
+							"referenceName": "ABS_FIPE_DATA",
+							"type": "LinkedServiceReference"
+						},
+						"path": "fipe-data/logs"
+					},
+					"enableLogging": true,
+					"storeSettings": {
+						"type": "AzureBlobStorageReadSettings",
+						"recursive": true,
+						"wildcardFileName": "marcas_*.json",
+						"enablePartitionDiscovery": false
+					}
+				}
 			}
 		],
 		"folder": {
