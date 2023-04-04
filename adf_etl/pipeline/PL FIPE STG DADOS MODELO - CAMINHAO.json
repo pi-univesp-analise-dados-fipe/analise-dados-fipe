@@ -153,7 +153,7 @@
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": false,
-							"wildcardFolderPath": "arquivo/dados_modelo/caminhao",
+							"wildcardFolderPath": "dados/dados_modelo/caminhao",
 							"wildcardFileName": "dados_modelo_caminhao_*.json",
 							"enablePartitionDiscovery": false
 						},
