@@ -1,0 +1,12 @@
+{
+	"name": "TMP_DADOS_MODELO_CAMINHAO",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ASD",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}
