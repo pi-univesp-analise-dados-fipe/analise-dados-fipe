@@ -1,5 +1,5 @@
 {
-	"name": "JSON_DADOS_MODELO_CAMINHAO",
+	"name": "JSON_DADOS_MODELO_CAMINHAO_SRC",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ABS_FIPE_DATA",
