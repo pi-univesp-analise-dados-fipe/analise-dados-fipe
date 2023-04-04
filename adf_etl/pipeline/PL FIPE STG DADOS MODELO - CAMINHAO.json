@@ -30,7 +30,7 @@
 						"type": "AzureSqlSink",
 						"preCopyScript": "truncate table fipe_stg.STG_DADOS_MODELO",
 						"writeBehavior": "insert",
-						"sqlWriterUseTableLock": true,
+						"sqlWriterUseTableLock": false,
 						"disableMetricsCollection": false
 					},
 					"enableStaging": false,
