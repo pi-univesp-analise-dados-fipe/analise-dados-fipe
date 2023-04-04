@@ -20,6 +20,8 @@
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": false,
+							"wildcardFolderPath": "dados/modelo",
+							"wildcardFileName": "modelos_*.json",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
@@ -88,7 +90,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "JSON_MODELO",
+						"referenceName": "JSON_MODELO_SRC",
 						"type": "DatasetReference"
 					}
 				],
@@ -98,6 +100,104 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "MOVE JSON MODELO REFERENCIA",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "STG MODELO",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": false,
+							"wildcardFolderPath": "dados/modelo",
+							"wildcardFileName": "modelos_*.json",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings",
+							"copyBehavior": "PreserveHierarchy"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "JSON_MODELO_SRC",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "JSON_MODELO_ARQ",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "DELETE JSON MODELO SRC",
+				"type": "Delete",
+				"dependsOn": [
+					{
+						"activity": "MOVE JSON MODELO REFERENCIA",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "JSON_MODELO_SRC",
+						"type": "DatasetReference"
+					},
+					"logStorageSettings": {
+						"linkedServiceName": {
+							"referenceName": "ABS_FIPE_DATA",
+							"type": "LinkedServiceReference"
+						},
+						"path": "fipe-data/logs"
+					},
+					"enableLogging": true,
+					"storeSettings": {
+						"type": "AzureBlobStorageReadSettings",
+						"recursive": false,
+						"wildcardFileName": "modelos_*.json",
+						"enablePartitionDiscovery": false
+					}
+				}
 			}
 		],
 		"folder": {
