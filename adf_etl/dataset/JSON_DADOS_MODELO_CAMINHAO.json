@@ -13,7 +13,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"folderPath": "dados_modelo/caminhao",
+				"fileName": "dados_modelo_caminhao_296.json",
+				"folderPath": "dados/dados_modelo/caminhao",
 				"container": "fipe-data"
 			}
 		},
