@@ -93,5 +93,6 @@
     <Build Include="fipe_dw\Stored Procedures\SP_DW_FTO_DADOS_MODELO.sql" />
     <Build Include="fipe_dw\Tables\DW_DIM_TIPO_VEICULO.sql" />
     <Build Include="fipe_dw\Stored Procedures\SP_UPDATE_FLG_ATIVO.sql" />
+    <Build Include="Security\etl_user.sql" />
   </ItemGroup>
 </Project>
