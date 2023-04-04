@@ -1,0 +1,75 @@
+{
+	"name": "JSON_DADOS_MODELO_CAMINHAO_TGT",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ABS_FIPE_DATA",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "JSON"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "arquivo/dados_modelo/caminhao",
+				"container": "fipe-data"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"Valor": {
+					"type": "string"
+				},
+				"Marca": {
+					"type": "string"
+				},
+				"Modelo": {
+					"type": "string"
+				},
+				"AnoModelo": {
+					"type": "integer"
+				},
+				"Combustivel": {
+					"type": "string"
+				},
+				"CodigoFipe": {
+					"type": "string"
+				},
+				"MesReferencia": {
+					"type": "string"
+				},
+				"Autenticacao": {
+					"type": "string"
+				},
+				"TipoVeiculo": {
+					"type": "integer"
+				},
+				"SiglaCombustivel": {
+					"type": "string"
+				},
+				"DataConsulta": {
+					"type": "string"
+				},
+				"codigoTipoVeiculo": {
+					"type": "integer"
+				},
+				"codigoMesReferencia": {
+					"type": "integer"
+				},
+				"codigoMarca": {
+					"type": "integer"
+				},
+				"codigoModelo": {
+					"type": "integer"
+				},
+				"codigoTipoCombustivel": {
+					"type": "integer"
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
