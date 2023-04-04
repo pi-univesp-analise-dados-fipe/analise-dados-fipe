@@ -17,59 +17,7 @@
 				"container": "fipe-data"
 			}
 		},
-		"schema": {
-			"type": "object",
-			"properties": {
-				"Valor": {
-					"type": "string"
-				},
-				"Marca": {
-					"type": "string"
-				},
-				"Modelo": {
-					"type": "string"
-				},
-				"AnoModelo": {
-					"type": "integer"
-				},
-				"Combustivel": {
-					"type": "string"
-				},
-				"CodigoFipe": {
-					"type": "string"
-				},
-				"MesReferencia": {
-					"type": "string"
-				},
-				"Autenticacao": {
-					"type": "string"
-				},
-				"TipoVeiculo": {
-					"type": "integer"
-				},
-				"SiglaCombustivel": {
-					"type": "string"
-				},
-				"DataConsulta": {
-					"type": "string"
-				},
-				"codigoTipoVeiculo": {
-					"type": "integer"
-				},
-				"codigoMesReferencia": {
-					"type": "integer"
-				},
-				"codigoMarca": {
-					"type": "integer"
-				},
-				"codigoModelo": {
-					"type": "integer"
-				},
-				"codigoTipoCombustivel": {
-					"type": "integer"
-				}
-			}
-		}
+		"schema": {}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
 }
