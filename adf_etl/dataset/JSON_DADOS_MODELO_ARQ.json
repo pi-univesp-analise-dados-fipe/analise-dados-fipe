@@ -1,5 +1,5 @@
 {
-	"name": "JSON_DADOS_MODELO_CAMINHAO_ARQ",
+	"name": "JSON_DADOS_MODELO_ARQ",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ABS_FIPE_DATA",
@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"folderPath": "arquivo/dados_modelo/caminhao",
+				"folderPath": "arquivo/dados_modelo",
 				"container": "fipe-data"
 			}
 		},
