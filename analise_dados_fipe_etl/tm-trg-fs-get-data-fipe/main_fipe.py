@@ -1,3 +1,5 @@
+import winsound
+
 import requests
 import datetime
 import logging
@@ -175,7 +177,7 @@ def get_amostra_dados_todos_modelos(tamanhoAmostra, tipoVeiculo, verbose):
     listaDadosModelo = list()
     i = 0
     for modelo in modelos:
-        if (verbose):
+        if (verbose and (i % 100 == 0)):
             print(f"Lendo dados de amostra do modelo {i + 1} de {tamanhoAmostra}. Tipo de veiculo: {tipoVeiculo.name}. Modelo: {modelo}")
         codigoTipoVeiculo = int(modelo["codigoTipoVeiculo"])
         codigoMesReferencia = int(modelo["codigoMesReferencia"])
@@ -222,7 +224,6 @@ def get_dados_todos_modelos(tipoVeiculo, qtdAnosRetroativos, codigoMesReferencia
             print(f"Lendo dados de modelo {i + 1} de {len(modelos)}. Codigo Mês Referência: {codigoMesReferencia} "
                   f"Tipo de veiculo: {tipoVeiculo.name}. Modelo: {modelo}")
         codigoTipoVeiculo = int(modelo["codigoTipoVeiculo"])
-        #codigoMesReferencia = int(modelo["codigoMesReferencia"]) #o mes de referencia vem por parametro
         modelo["codigoMesReferencia"] = codigoMesReferencia
         codigoMarca = int(modelo["codigoMarca"])
         codigoModelo = int(modelo["codigoModelo"])
@@ -231,9 +232,6 @@ def get_dados_todos_modelos(tipoVeiculo, qtdAnosRetroativos, codigoMesReferencia
                                     codigoMarca=codigoMarca,
                                     codigoModelo=codigoModelo
                                     )
-
-        #codTipoVeiculo, codMesReferencia, codigoMarca, codigoModelo
-
         for anoModelo in anosModelo:
 
             if (tipoVeiculo.value == 1): #carro
@@ -281,30 +279,52 @@ def save_json_dados_todos_modelos(dadosModelo, tipoVeiculo, flgAmostra, codigoMe
     else:
         save_file_json(dadosModelo, f"modelos/dados_modelo_{tipoVeiculo.name}_{codigoMesReferencia}", False)
 
+def save_json_dados_todos_modelos_periodo(minCodigoMesReferencia, maxCodigoMesReferencia, tipoVeiculo, qtdAnosRetroativos):
+    # dados = get_amostra_dados_todos_modelos(tamanhoAmostra=tamanho_amostra, verbose=True)
+    periodos = get_periodo_referencia()
+    for periodo in periodos:
+        try:
+            if (periodo["Codigo"] >= minCodigoMesReferencia and periodo["Codigo"] < maxCodigoMesReferencia ):
+                codigoMesReferencia = periodo["Codigo"]
+                dados = get_dados_todos_modelos(tipoVeiculo=tipoVeiculo, verbose=True, qtdAnosRetroativos=qtdAnosRetroativos,
+                                                codigoMesReferencia=codigoMesReferencia)
+                save_json_dados_todos_modelos(dadosModelo=dados, tipoVeiculo=tipoVeiculo, flgAmostra=False,
+                                              codigoMesReferencia=codigoMesReferencia)
+                print(f"Salvo os dados dos modelos: {datetime.datetime.now()}")
+        except:
+            pass
+
+def save_json_dados_todos_modelos_periodo(codigoMesReferencia, tipoVeiculo, qtdAnosRetroativos, verbose):
+    dados = get_dados_todos_modelos(tipoVeiculo=tipoVeiculo, verbose=verbose, qtdAnosRetroativos=qtdAnosRetroativos,
+                                    codigoMesReferencia=codigoMesReferencia)
+    save_json_dados_todos_modelos(dadosModelo=dados, tipoVeiculo=tipoVeiculo, flgAmostra=False,
+                                  codigoMesReferencia=codigoMesReferencia)
+    print(f"Salvo os dados dos modelos do periodo {codigoMesReferencia}. Tipo de Veiculo: {tipoVeiculo.name}. Data: {datetime.datetime.now()}")
+
+
 if __name__ == '__main__':
 
-    #save_json_todos_modelos()
+    # save_json_todos_modelos()
     # Chamada 2 - Get Marcas - salva todas as marcas em arquivos json
-    #maxReferencia = getMaxReferencia()
-    #print(getMaxReferencia())
+    # maxReferencia = getMaxReferencia()
+    # print(getMaxReferencia())
 
     #  print(get_modelos_por_marca(1, 295,  1))
     # def get_ano_modelo(tipoVeiculo, mesReferencia, codigoTipoVeiculo, codigoMarca, codigoModelo):
     #    data = get_anos_modelo(tipoVeiculo=1,mesReferencia= 250,codigoTipoVeiculo= 1,codigoMarca= 6,codigoModelo=7727)
     # save_json_dados_todos_modelos()
-    #save_json_periodo_referencia()
-    #save_json_todas_marcas()
-    #save_json_todas_marcas()
+    # save_json_periodo_referencia()
+    # save_json_todas_marcas()
+    # save_json_todas_marcas()
     print(f"Início de execucao: {datetime.datetime.now()}")
 
-    #save_json_todos_modelos(get_todos_modelos())
-    #print(f"Salva a lista de modelos: {datetime.now()}")
-
-    #dados = get_amostra_dados_todos_modelos(tamanhoAmostra=tamanho_amostra, verbose=True)
-    codigoMesReferencia = 287
-    tipoVeiculo = TipoVeiculoFipe.moto
-    dados = get_dados_todos_modelos(tipoVeiculo=tipoVeiculo, verbose=True, qtdAnosRetroativos=15, codigoMesReferencia=codigoMesReferencia)
-    save_json_dados_todos_modelos(dadosModelo=dados,  tipoVeiculo=tipoVeiculo,flgAmostra=False, codigoMesReferencia=codigoMesReferencia)
-    print(f"Salvo os dados dos modelos: {datetime.datetime.now()}")
+    # save_json_todos_modelos(get_todos_modelos())
+    # print(f"Salva a lista de modelos: {datetime.now()}")
+    anos_pendentes = [283, 280, 274, 271, 270, 267, 265, 264, 263, 260, 253, 250]
+    for ano in anos_pendentes:
+        try:
+            save_json_dados_todos_modelos_periodo(codigoMesReferencia=ano, tipoVeiculo=TipoVeiculoFipe.caminhao, qtdAnosRetroativos=15, verbose=False)
+        except:
+            pass
 
 

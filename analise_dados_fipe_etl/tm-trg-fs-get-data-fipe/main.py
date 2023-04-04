@@ -1,3 +1,5 @@
+import winsound
+
 import requests
 import datetime
 import logging
@@ -115,6 +117,62 @@ def get_todos_modelos(tipoVeiculo, codigoMesReferencia):
     return listaModelos
 
 
+def save_todos_modelos_por_marca(tipoVeiculo, qtdAnosRetroativos, codigoMesReferencia, verbose):
+    if (codigoMesReferencia is None):
+        codigoMesReferencia = getMaxReferencia()
+
+    marcas = get_marcas_por_tipo(tipoVeiculo.value, codigoMesReferencia)
+    for marca in marcas:
+        listaDadosModelo = list()
+        modelos = get_modelos_por_marca(codigoTipoVeiculo=tipoVeiculo.value, codigoMesReferencia=codigoMesReferencia,
+                                            codigoMarca=int(marca["codigoMarca"]))
+        for modelo in modelos:
+            i = 0
+            if (qtdAnosRetroativos is not None):
+                anoInicio = get_ano_atual() - qtdAnosRetroativos
+            codigoTipoVeiculo = int(modelo["codigoTipoVeiculo"])
+            modelo["codigoMesReferencia"] = codigoMesReferencia
+            codigoMarca = int(modelo["codigoMarca"])
+            codigoModelo = int(modelo["codigoModelo"])
+            anosModelo = get_anos_modelo(codigoTipoVeiculo=codigoTipoVeiculo,
+                                         codMesReferencia=codigoMesReferencia,
+                                         codigoMarca=codigoMarca,
+                                         codigoModelo=codigoModelo
+                                         )
+            for anoModelo in anosModelo:
+                if (tipoVeiculo.value == 1):  # carro
+                    if ('Label' in anoModelo):
+                        anoModelo["ano"] = numAnoModelo = int(anoModelo['Label'].split()[0])
+                        anoModelo["combustivel"] = anoModelo['Label'].split()[1]
+                        codigoTipoCombustivel = int(get_codigo_tipo_combustivel(anoModelo['Label'].split()[1]))
+                    else:
+                        anoModelo["ano"] = numAnoModelo = get_ano_atual()
+                        codigoTipoCombustivel = 1
+                elif (tipoVeiculo.value == 2):  # moto:
+                    if ('Label' in anoModelo):
+                        anoModelo["ano"] = numAnoModelo = int(anoModelo['Label'])
+                    else:
+                        anoModelo["ano"] = numAnoModelo = get_ano_atual()
+                    codigoTipoCombustivel = 1
+                elif (tipoVeiculo.value == 3):  # caminhão
+                    if ('Label' in anoModelo):
+                        anoModelo["ano"] = numAnoModelo = int(anoModelo['Label'])
+                    else:
+                        anoModelo["ano"] = numAnoModelo = get_ano_atual()
+                    codigoTipoCombustivel = 3
+                if (qtdAnosRetroativos is not None):
+                    if (numAnoModelo < anoInicio):
+                        break
+                dados_modelo = get_dados_modelo(codigoTipoVeiculo, codigoMesReferencia, codigoMarca, codigoModelo,
+                                                numAnoModelo,
+                                                codigoTipoCombustivel)
+                listaDadosModelo.append(dados_modelo)
+            i = i + 1
+        if (len(listaDadosModelo) > 0):
+            save_file_json(listaDadosModelo, f"modelos/dados_modelo_carro/dados_modelo_{tipoVeiculo.name}_marca_{marca['nomeMarca']}_mes_{codigoMesReferencia}", False)
+            print(f"Salvo os modelos da marca {marca['nomeMarca']}. Tipo de veiculo: {tipoVeiculo.name}. Mes Referencia: {codigoMesReferencia}. Data: {datetime.datetime.now()}")
+
+
 def save_json_todos_modelos(listaModelos):
     save_file_json(listaModelos, f"modelos/modelos", False)
 
@@ -175,7 +233,7 @@ def get_amostra_dados_todos_modelos(tamanhoAmostra, tipoVeiculo, verbose):
     listaDadosModelo = list()
     i = 0
     for modelo in modelos:
-        if (verbose):
+        if (verbose and (i % 100 == 0)):
             print(f"Lendo dados de amostra do modelo {i + 1} de {tamanhoAmostra}. Tipo de veiculo: {tipoVeiculo.name}. Modelo: {modelo}")
         codigoTipoVeiculo = int(modelo["codigoTipoVeiculo"])
         codigoMesReferencia = int(modelo["codigoMesReferencia"])
@@ -283,28 +341,41 @@ def save_json_dados_todos_modelos(dadosModelo, tipoVeiculo, flgAmostra, codigoMe
 
 if __name__ == '__main__':
 
-    #save_json_todos_modelos()
+    # save_json_todos_modelos()
     # Chamada 2 - Get Marcas - salva todas as marcas em arquivos json
-    #maxReferencia = getMaxReferencia()
-    #print(getMaxReferencia())
+    # maxReferencia = getMaxReferencia()
+    # print(getMaxReferencia())
 
     #  print(get_modelos_por_marca(1, 295,  1))
     # def get_ano_modelo(tipoVeiculo, mesReferencia, codigoTipoVeiculo, codigoMarca, codigoModelo):
     #    data = get_anos_modelo(tipoVeiculo=1,mesReferencia= 250,codigoTipoVeiculo= 1,codigoMarca= 6,codigoModelo=7727)
     # save_json_dados_todos_modelos()
-    #save_json_periodo_referencia()
-    #save_json_todas_marcas()
-    #save_json_todas_marcas()
+    # save_json_periodo_referencia()
+    # save_json_todas_marcas()
+    # save_json_todas_marcas()
     print(f"Início de execucao: {datetime.datetime.now()}")
 
-    #save_json_todos_modelos(get_todos_modelos())
-    #print(f"Salva a lista de modelos: {datetime.now()}")
+    # save_json_todos_modelos(get_todos_modelos())
+    # print(f"Salva a lista de modelos: {datetime.now()}")
 
-    #dados = get_amostra_dados_todos_modelos(tamanhoAmostra=tamanho_amostra, verbose=True)
-    codigoMesReferencia = 287
-    tipoVeiculo = TipoVeiculoFipe.caminhao
-    dados = get_dados_todos_modelos(tipoVeiculo=tipoVeiculo, verbose=True, qtdAnosRetroativos=15, codigoMesReferencia=codigoMesReferencia)
-    save_json_dados_todos_modelos(dadosModelo=dados,  tipoVeiculo=tipoVeiculo,flgAmostra=False, codigoMesReferencia=codigoMesReferencia)
-    print(f"Salvo os dados dos modelos: {datetime.datetime.now()}")
+    # dados = get_amostra_dados_todos_modelos(tamanhoAmostra=tamanho_amostra, verbose=True)
+    minCodigoMesReferencia = 250
+    maxCodigoMesReferencia = 295
+    tipoVeiculo = TipoVeiculoFipe.carro
+    periodos = get_periodo_referencia()
+    for periodo in periodos:
+        try:
+            if (periodo["Codigo"] >= minCodigoMesReferencia and periodo["Codigo"] < maxCodigoMesReferencia ):
+                codigoMesReferencia = periodo["Codigo"]
+                save_todos_modelos_por_marca(tipoVeiculo=tipoVeiculo, codigoMesReferencia=codigoMesReferencia,
+                                             qtdAnosRetroativos=15, verbose=True)
+        except:
+            pass
+
+"""
+    frequency = 10000  # Set Frequency To 2500 Hertz
+    duration = 1000  # Set Duration To 1000 ms == 1 second
+    winsound.Beep(frequency, duration)
+"""
 
 
