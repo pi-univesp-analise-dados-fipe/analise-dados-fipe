@@ -20,8 +20,6 @@
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": false,
-							"wildcardFolderPath": "dados/dados_modelo/caminhao",
-							"wildcardFileName": "dados_modelo_caminhao_296.json",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
@@ -54,7 +52,7 @@
 								},
 								"sink": {
 									"name": "NUM_ANO_MODELO",
-									"type": "Int32"
+									"type": "String"
 								}
 							},
 							{
