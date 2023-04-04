@@ -21,7 +21,7 @@
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": false,
 							"wildcardFolderPath": "dados/dados_modelo/caminhao",
-							"wildcardFileName": "dados_modelo_caminhao_*.json",
+							"wildcardFileName": "dados_modelo_caminhao_296.json",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
