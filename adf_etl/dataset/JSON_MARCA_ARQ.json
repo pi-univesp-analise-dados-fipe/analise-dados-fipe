@@ -1,5 +1,5 @@
 {
-	"name": "JSON_MARCA_TGT",
+	"name": "JSON_MARCA_ARQ",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ABS_FIPE_DATA",
