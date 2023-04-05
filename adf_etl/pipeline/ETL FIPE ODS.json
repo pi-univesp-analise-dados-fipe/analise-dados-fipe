@@ -74,33 +74,6 @@
 					"referenceName": "ASD",
 					"type": "LinkedServiceReference"
 				}
-			},
-			{
-				"name": "SP ODS DADOS MODELO",
-				"type": "SqlServerStoredProcedure",
-				"dependsOn": [
-					{
-						"activity": "SP ODS MODELO",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"storedProcedureName": "[fipe_ods].[SP_ODS_DADOS_MODELO]"
-				},
-				"linkedServiceName": {
-					"referenceName": "ASD",
-					"type": "LinkedServiceReference"
-				}
 			}
 		],
 		"folder": {
