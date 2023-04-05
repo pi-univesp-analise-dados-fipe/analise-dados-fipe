@@ -48,7 +48,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"storedProcedureName": "[fipe_dw].[SP_DW_FTO_DADOS_MODELO]"
+					"storedProcedureName": "[fipe_dw].[SP_DW_FTO_DADOS_MODELO_STG]"
 				},
 				"linkedServiceName": {
 					"referenceName": "ASD",
