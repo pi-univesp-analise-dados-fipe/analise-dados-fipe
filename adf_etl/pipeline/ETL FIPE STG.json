@@ -16,19 +16,6 @@
 				}
 			},
 			{
-				"name": "PL FIPE STG DADOS MODELO",
-				"type": "ExecutePipeline",
-				"dependsOn": [],
-				"userProperties": [],
-				"typeProperties": {
-					"pipeline": {
-						"referenceName": "PL FIPE STG DADOS MODELO old",
-						"type": "PipelineReference"
-					},
-					"waitOnCompletion": true
-				}
-			},
-			{
 				"name": "PL FIPE STG MARCA",
 				"type": "ExecutePipeline",
 				"dependsOn": [],
@@ -36,6 +23,19 @@
 				"typeProperties": {
 					"pipeline": {
 						"referenceName": "PL FIPE STG MARCA",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "PL FIPE STG DADOS MODELO",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL FIPE STG DADOS MODELO",
 						"type": "PipelineReference"
 					},
 					"waitOnCompletion": true
