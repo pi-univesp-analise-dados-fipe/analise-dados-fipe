@@ -22,7 +22,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
-						"referenceName": "PL FIPE STG DADOS MODELO",
+						"referenceName": "PL FIPE STG DADOS MODELO old",
 						"type": "PipelineReference"
 					},
 					"waitOnCompletion": true
