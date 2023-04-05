@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "IMPORT JSON DADOS MODELO - CAMINHAO",
+				"name": "IMPORT JSON DADOS MODELO",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -129,11 +129,11 @@
 				]
 			},
 			{
-				"name": "MOVE JSON DADOS MODELO - CAMINHAO",
+				"name": "MOVE JSON DADOS MODELO",
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "IMPORT JSON DADOS MODELO - CAMINHAO",
+						"activity": "IMPORT JSON DADOS MODELO",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -187,11 +187,11 @@
 				]
 			},
 			{
-				"name": "APAGA JSON DADOS MODELO - CAMINHAO",
+				"name": "APAGA JSON DADOS MODELO",
 				"type": "Delete",
 				"dependsOn": [
 					{
-						"activity": "MOVE JSON DADOS MODELO - CAMINHAO",
+						"activity": "MOVE JSON DADOS MODELO ",
 						"dependencyConditions": [
 							"Succeeded"
 						]
