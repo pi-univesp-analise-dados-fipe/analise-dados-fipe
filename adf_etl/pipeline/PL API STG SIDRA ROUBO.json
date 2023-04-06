@@ -1,0 +1,197 @@
+{
+	"name": "PL API STG SIDRA ROUBO",
+	"properties": {
+		"activities": [
+			{
+				"name": "API PARA STG SIDRA ROUBO",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "RestSource",
+						"httpRequestTimeout": "00:01:40",
+						"requestInterval": "00.00:00:00.010",
+						"requestMethod": "GET",
+						"paginationRules": {
+							"supportRFC5988": "true"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "truncate table fipe_stg.STG_MES_REFERENCIA",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['NC']"
+								},
+								"sink": {
+									"name": "NC",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['NN']"
+								},
+								"sink": {
+									"name": "NN",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['MC']"
+								},
+								"sink": {
+									"name": "MC",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['MN']"
+								},
+								"sink": {
+									"name": "MN",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['V']"
+								},
+								"sink": {
+									"name": "V",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['D1C']"
+								},
+								"sink": {
+									"name": "D1C",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['D1N']"
+								},
+								"sink": {
+									"name": "D1N",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['D2C']"
+								},
+								"sink": {
+									"name": "D2C",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['D2N']"
+								},
+								"sink": {
+									"name": "D2N",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['D3C']"
+								},
+								"sink": {
+									"name": "D3C",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['D3N']"
+								},
+								"sink": {
+									"name": "D3N",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['D4C']"
+								},
+								"sink": {
+									"name": "D4C",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['D4N']"
+								},
+								"sink": {
+									"name": "D4N",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['D5C']"
+								},
+								"sink": {
+									"name": "D5C",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['D5N']"
+								},
+								"sink": {
+									"name": "D5N",
+									"type": "String"
+								}
+							}
+						],
+						"collectionReference": "",
+						"mapComplexValuesToString": true
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "REST_SIDRA_ROUBO",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "STG_SIDRA_INDICADORES",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "API"
+		},
+		"annotations": []
+	}
+}

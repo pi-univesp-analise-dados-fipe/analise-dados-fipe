@@ -1,0 +1,77 @@
+{
+	"name": "STG_SIDRA_INDICADORES",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ASD",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "COD_NIVEL_TERRITORIAL",
+				"type": "varchar"
+			},
+			{
+				"name": "NME_NIVEL_TERRITORIAL",
+				"type": "varchar"
+			},
+			{
+				"name": "COD_UNIDADE_MEDIDA",
+				"type": "varchar"
+			},
+			{
+				"name": "NME_UNIDADE_MEDIDA",
+				"type": "varchar"
+			},
+			{
+				"name": "VLR_MEDIDA",
+				"type": "varchar"
+			},
+			{
+				"name": "COD_REGIAO",
+				"type": "varchar"
+			},
+			{
+				"name": "NME_REGIAO",
+				"type": "varchar"
+			},
+			{
+				"name": "COD_VARIAVEL",
+				"type": "varchar"
+			},
+			{
+				"name": "NME_VARIAVEL",
+				"type": "varchar"
+			},
+			{
+				"name": "COD_ANO",
+				"type": "varchar"
+			},
+			{
+				"name": "NUM_ANO",
+				"type": "varchar"
+			},
+			{
+				"name": "COD_TIPO_FURTO",
+				"type": "varchar"
+			},
+			{
+				"name": "NME_TIPO_FURTO",
+				"type": "varchar"
+			},
+			{
+				"name": "COD_LOCAL_FURTO",
+				"type": "varchar"
+			},
+			{
+				"name": "NME_LOCAL_FURTO",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "fipe_stg",
+			"table": "STG_SIDRA_INDICADOR"
+		}
+	}
+}
