@@ -1,0 +1,15 @@
+{
+	"name": "REST_SIDRA_ROUBO",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "REST SIDRA",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": "values/t/8500/n1/all/v/all/p/all/c1353/57311,57312,57313/c1354/all/d/v12474%201,v12475%201,v12476%201"
+		},
+		"schema": []
+	}
+}
