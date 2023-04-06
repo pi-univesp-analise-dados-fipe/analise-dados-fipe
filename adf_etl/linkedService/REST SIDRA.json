@@ -1,0 +1,12 @@
+{
+	"name": "REST SIDRA",
+	"properties": {
+		"annotations": [],
+		"type": "RestService",
+		"typeProperties": {
+			"url": "https://apisidra.ibge.gov.br",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}
