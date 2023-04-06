@@ -1,5 +1,5 @@
 {
-	"name": "REST_SIDRA_ROUBO",
+	"name": "REST_SIDRA",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "REST SIDRA",
