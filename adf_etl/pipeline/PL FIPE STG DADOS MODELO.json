@@ -189,14 +189,7 @@
 			{
 				"name": "APAGA JSON DADOS MODELO",
 				"type": "Delete",
-				"dependsOn": [
-					{
-						"activity": "MOVE JSON DADOS MODELO ",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -228,7 +221,7 @@
 			}
 		],
 		"folder": {
-			"name": "BLOB FIPE"
+			"name": "BLOB STORAGE"
 		},
 		"annotations": [],
 		"lastPublishTime": "2023-03-28T16:27:06Z"
