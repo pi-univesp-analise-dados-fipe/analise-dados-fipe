@@ -1,5 +1,5 @@
 {
-	"name": "REST_SIDRA_ROUBO_IPCA",
+	"name": "REST_SIDRA_IPCA",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "REST SIDRA",
