@@ -189,7 +189,14 @@
 			{
 				"name": "APAGA JSON DADOS MODELO",
 				"type": "Delete",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "MOVE JSON DADOS MODELO",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
