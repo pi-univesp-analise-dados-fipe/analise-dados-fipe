@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "API PARA STG SIDRA ROUBO",
+				"name": "STG INDICADOR SIDRA IPCA",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -26,7 +26,7 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"preCopyScript": "truncate table fipe_stg.STG_SIDRA_INDICADOR",
+						"preCopyScript": "truncate table fipe_stg.STG_INDICADOR_SIDRA",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false,
 						"disableMetricsCollection": false
@@ -177,23 +177,23 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "REST_SIDRA_ROUBO",
+						"referenceName": "REST_SIDRA_IPCA",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "STG_SIDRA_INDICADORES",
+						"referenceName": "STG_INDICADOR_SIDRA",
 						"type": "DatasetReference"
 					}
 				]
 			},
 			{
-				"name": "API PARA STG SIDRA ROUBO_copy1",
+				"name": "STG INDICADOR SIDRA INPC",
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "API PARA STG SIDRA ROUBO",
+						"activity": "STG INDICADOR SIDRA IPCA",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -369,13 +369,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "REST_SIDRA_IPCA",
+						"referenceName": "REST_SIDRA_INPC",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "STG_SIDRA_INDICADORES",
+						"referenceName": "STG_INDICADOR_SIDRA",
 						"type": "DatasetReference"
 					}
 				]
