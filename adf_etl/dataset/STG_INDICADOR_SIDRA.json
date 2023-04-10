@@ -1,5 +1,5 @@
 {
-	"name": "STG_SIDRA_INDICADORES",
+	"name": "STG_INDICADOR_SIDRA",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ASD",
@@ -71,7 +71,7 @@
 		],
 		"typeProperties": {
 			"schema": "fipe_stg",
-			"table": "STG_SIDRA_INDICADOR"
+			"table": "STG_INDICADOR_SIDRA"
 		}
 	}
 }
