@@ -1,0 +1,15 @@
+{
+	"name": "REST_SIDRA_INPC",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "REST SIDRA",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": "values/t/1736/n1/all/v/all/p/all/d/v44%202,v68%202,v2289%2013,v2290%202,v2291%202,v2292%202"
+		},
+		"schema": []
+	}
+}
