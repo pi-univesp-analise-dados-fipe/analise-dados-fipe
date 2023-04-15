@@ -8,7 +8,7 @@
 		"annotations": [],
 		"type": "RestResource",
 		"typeProperties": {
-			"relativeUrl": "values/t/1736/n1/all/v/all/p/all/d/v44%202,v68%202,v2289%2013,v2290%202,v2291%202,v2292%202"
+			"relativeUrl": "https://apisidra.ibge.gov.br/values/t/7063/n1/all/n71/all/n7/all/n6/all/v/all/p/all/c315/7169,7645/d/v44%202,v45%204,v68%202,v2292%202"
 		},
 		"schema": []
 	}
