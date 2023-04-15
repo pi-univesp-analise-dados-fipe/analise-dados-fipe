@@ -4,6 +4,7 @@ import requests
 import datetime
 import logging
 import json
+import time
 import datetime
 
 from requests import JSONDecodeError
@@ -21,11 +22,20 @@ endpointAnoModelo = "ConsultarAnoModelo"
 
 def get_periodo_referencia():
     url_ref = f"{urlBaseAPI}/{endpoint_referencia}"
-    response = requests.post(url_ref)
     try:
+        response = requests.post(url_ref)
         dados = response.json()
     except JSONDecodeError:
-        print(f"Erro ao processar requisição.  Modelo: {url_ref}")
+        print(f"Erro ao processar requisição.  Modelo: {url_ref}. Tentando novamente")
+        time.sleep(20)
+        response = requests.post(url_ref)
+        dados = response.json()
+    except ConnectionError:
+        print(f"Erro ao processar requisição.  Modelo: {url_ref}. Tentando novamente")
+        time.sleep(60)
+        response = requests.post(url_ref)
+        marcas = response.json()
+
     return dados
 
 
@@ -42,13 +52,22 @@ def save_json_periodo_referencia():
 
 def get_marcas_por_tipo(codigoTipoVeiculo, codigoMesReferencia):
     url_marca = f"{urlBaseAPI}/{endpoint_marcas}?codigoTipoVeiculo={codigoTipoVeiculo}&codigoTabelaReferencia={codigoMesReferencia}"
-    response = requests.post(url_marca)
+
     #listaMarcas = list()
     lista_dados_modelo = list()
     try:
+        response = requests.post(url_marca)
         marcas = response.json()
     except JSONDecodeError:
-        print(f"Erro ao processar requisição.  Modelo: {url_marca}")
+        print(f"Erro ao processar requisição.  Modelo: {url_marca}. Tentando novamente")
+        time.sleep(20)
+        response = requests.post(url_marca)
+        marcas = response.json()
+    except ConnectionError:
+        print(f"Erro ao processar requisição.  Modelo: {url_marca}. Tentando novamente")
+        time.sleep(60)
+        response = requests.post(url_marca)
+        marcas = response.json()
     for marca in marcas:
         marca["codigoMarca"] = int(marca["Value"])
         marca["nomeMarca"] = marca["Label"]
@@ -79,18 +98,24 @@ def get_modelos_por_marca(codigoTipoVeiculo, codigoMesReferencia, codigoMarca):
     try:
         dados_modelo = response.json()
     except JSONDecodeError:
-        print(f"Erro ao processar requisição.  Modelo: {urlModelo}")
+        print(f"Erro ao processar requisição.  Modelo: {urlModelo}. Tentando novamente")
+        time.sleep(20)
+        response = requests.post(urlModelo)
+        dados_modelo = response.json()
     dados_modelo["CodigoMarca"] = codigoMarca
-    modelos = dados_modelo["Modelos"]
-    for modelo in modelos:
-        modelo["codigoModelo"] = modelo["Value"]
-        modelo["nomeModelo"] = modelo["Label"]
-        modelo["codigoTipoVeiculo"] = codigoTipoVeiculo
-        modelo["codigoMesReferencia"] = codigoMesReferencia
-        modelo["codigoMarca"] = codigoMarca
-        del modelo["Value"]
-        del modelo["Label"]
-    return modelos
+    if "Modelos" in dados_modelo.keys():
+        modelos = dados_modelo["Modelos"]
+        for modelo in modelos:
+            modelo["codigoModelo"] = modelo["Value"]
+            modelo["nomeModelo"] = modelo["Label"]
+            modelo["codigoTipoVeiculo"] = codigoTipoVeiculo
+            modelo["codigoMesReferencia"] = codigoMesReferencia
+            modelo["codigoMarca"] = codigoMarca
+            del modelo["Value"]
+            del modelo["Label"]
+        return modelos
+    else:
+        return None
 
 def get_todos_modelos():
     maxReferencia = getMaxReferencia()
@@ -169,8 +194,61 @@ def save_todos_modelos_por_marca(tipoVeiculo, qtdAnosRetroativos, codigoMesRefer
                 listaDadosModelo.append(dados_modelo)
             i = i + 1
         if (len(listaDadosModelo) > 0):
-            save_file_json(listaDadosModelo, f"modelos/dados_modelo_carro/dados_modelo_{tipoVeiculo.name}_marca_{marca['nomeMarca']}_mes_{codigoMesReferencia}", False)
+            save_file_json(listaDadosModelo, f"modelos/{tipoVeiculo.name}/dados_modelo_{tipoVeiculo.name}_mes_{codigoMesReferencia}_marca_{marca['nomeMarca']}", False)
             print(f"Salvo os modelos da marca {marca['nomeMarca']}. Tipo de veiculo: {tipoVeiculo.name}. Mes Referencia: {codigoMesReferencia}. Data: {datetime.datetime.now()}")
+
+def save_modelos_por_marca(tipoVeiculo, qtdAnosRetroativos, codigoMesReferencia, codigoMarca):
+    if (codigoMesReferencia is None):
+        codigoMesReferencia = getMaxReferencia()
+    listaDadosModelo = list()
+    modelos = get_modelos_por_marca(codigoTipoVeiculo=tipoVeiculo.value, codigoMesReferencia=codigoMesReferencia,
+                                        codigoMarca=codigoMarca)
+    if (modelos is not None):
+        for modelo in modelos:
+            i = 0
+            if (qtdAnosRetroativos is not None):
+                anoInicio = get_ano_atual() - qtdAnosRetroativos
+            codigoTipoVeiculo = int(modelo["codigoTipoVeiculo"])
+            modelo["codigoMesReferencia"] = codigoMesReferencia
+            codigoMarca = int(modelo["codigoMarca"])
+            codigoModelo = int(modelo["codigoModelo"])
+            anosModelo = get_anos_modelo(codigoTipoVeiculo=codigoTipoVeiculo,
+                                         codMesReferencia=codigoMesReferencia,
+                                         codigoMarca=codigoMarca,
+                                         codigoModelo=codigoModelo
+                                         )
+            for anoModelo in anosModelo:
+                if (tipoVeiculo.value == 1):  # carro
+                    if ('Label' in anoModelo):
+                        anoModelo["ano"] = numAnoModelo = int(anoModelo['Label'].split()[0])
+                        anoModelo["combustivel"] = anoModelo['Label'].split()[1]
+                        codigoTipoCombustivel = int(get_codigo_tipo_combustivel(anoModelo['Label'].split()[1]))
+                    else:
+                        anoModelo["ano"] = numAnoModelo = get_ano_atual()
+                        codigoTipoCombustivel = 1
+                elif (tipoVeiculo.value == 2):  # moto:
+                    if ('Label' in anoModelo):
+                        anoModelo["ano"] = numAnoModelo = int(anoModelo['Label'])
+                    else:
+                        anoModelo["ano"] = numAnoModelo = get_ano_atual()
+                    codigoTipoCombustivel = 1
+                elif (tipoVeiculo.value == 3):  # caminhão
+                    if ('Label' in anoModelo):
+                        anoModelo["ano"] = numAnoModelo = int(anoModelo['Label'])
+                    else:
+                        anoModelo["ano"] = numAnoModelo = get_ano_atual()
+                    codigoTipoCombustivel = 3
+                if (qtdAnosRetroativos is not None):
+                    if (numAnoModelo < anoInicio):
+                        break
+                dados_modelo = get_dados_modelo(codigoTipoVeiculo, codigoMesReferencia, codigoMarca, codigoModelo,
+                                                numAnoModelo,
+                                                codigoTipoCombustivel)
+                listaDadosModelo.append(dados_modelo)
+            i = i + 1
+    if (len(listaDadosModelo) > 0):
+        save_file_json(listaDadosModelo, f"modelos/{tipoVeiculo.name}/dados_modelo_{tipoVeiculo.name}_mes_{codigoMesReferencia}_marca_{codigoMarca}", False)
+        print(f"Salvo os modelos da marca {codigoMarca}. Tipo de veiculo: {tipoVeiculo.name}. Mes Referencia: {codigoMesReferencia}. Data: {datetime.datetime.now()}")
 
 
 def save_json_todos_modelos(listaModelos):
@@ -201,7 +279,11 @@ def get_dados_modelo(codigoTipoVeiculo, codigoMesReferencia, codigoMarca, codigo
     try:
         dados_modelo = response.json()
     except JSONDecodeError:
-        print(f"Erro ao processar requisição.  Modelo: {urlDadosModelo}")
+        print(f"Erro ao processar requisição.  Modelo: {urlDadosModelo}. Tentando novamente")
+        time.sleep(20)
+        response = requests.post(urlDadosModelo)
+        dados_modelo = response.json()
+
     dados_modelo["codigoTipoVeiculo"] = codigoTipoVeiculo
     dados_modelo["codigoMesReferencia"] = codigoMesReferencia
     dados_modelo["codigoMarca"] = codigoMarca
@@ -218,8 +300,17 @@ def get_anos_modelo(codigoTipoVeiculo, codMesReferencia, codigoMarca, codigoMode
     response = requests.post(urlModelo)
     try:
         anosModelo = response.json()
+
     except JSONDecodeError:
-        print(f"Erro ao processar requisição.  Modelo: {urlModelo}")
+        print(f"Erro ao processar requisição.  Modelo: {urlModelo}. Tentando novamente")
+        time.sleep(20)
+        response = requests.post(urlModelo)
+        anosModelo = response.json()
+    except ConnectionError:
+        print(f"Erro ao processar requisição.  Modelo: {urlModelo}. Tentando novamente")
+        time.sleep(60)
+        response = requests.post(urlModelo)
+        anosModelo = response.json()
     return anosModelo
 
 def get_ano_atual():
@@ -257,8 +348,17 @@ def get_amostra_dados_todos_modelos(tamanhoAmostra, tipoVeiculo, verbose):
                 dados_modelo = get_dados_modelo(codigoTipoVeiculo, codigoMesReferencia, codigoMarca, codigoModelo, numAnoModelo,
                                      codigoTipoCombustivel)
             except JSONDecodeError:
-                print(f"Erro ao processar requisição.  Modelo: {modelo}")
-                break
+                print(f"Erro ao processar requisição.  Modelo: {modelo}. Tentando novamente")
+                time.sleep(20)
+                dados_modelo = get_dados_modelo(codigoTipoVeiculo, codigoMesReferencia, codigoMarca, codigoModelo,
+                                                numAnoModelo,
+                                                codigoTipoCombustivel)
+            except ConnectionError:
+                print(f"Erro ao processar requisição.  Modelo: {modelo}. Tentando novamente")
+                time.sleep(60)
+                dados_modelo = get_dados_modelo(codigoTipoVeiculo, codigoMesReferencia, codigoMarca, codigoModelo,
+                                                numAnoModelo,
+                                                codigoTipoCombustivel)
             if ("codigo" not in dados_modelo):
                 listaDadosModelo.append(dados_modelo)
         i = i + 1
@@ -335,9 +435,17 @@ def get_codigo_tipo_combustivel(tipoCombustivel):
 
 def save_json_dados_todos_modelos(dadosModelo, tipoVeiculo, flgAmostra, codigoMesReferencia):
     if (flgAmostra):
-        save_file_json(dadosModelo, f"modelos/amostra_dados_modelo_{tipoVeiculo.name}_{len(dadosModelo)}_{codigoMesReferencia}", False)
+        save_file_json(dadosModelo, f"modelos/{tipoVeiculo.name}/amostra_dados_modelo_{tipoVeiculo.name}_{len(dadosModelo)}_{codigoMesReferencia}", False)
     else:
-        save_file_json(dadosModelo, f"modelos/dados_modelo_{tipoVeiculo.name}_{codigoMesReferencia}", False)
+        save_file_json(dadosModelo, f"modelos/{tipoVeiculo.name}/dados_modelo_{tipoVeiculo.name}_{codigoMesReferencia}", False)
+
+
+def save_json_dados_todos_modelos_periodo(codigoMesReferencia, tipoVeiculo, qtdAnosRetroativos, verbose):
+    dados = get_dados_todos_modelos(tipoVeiculo=tipoVeiculo, verbose=verbose, qtdAnosRetroativos=qtdAnosRetroativos,
+                                    codigoMesReferencia=codigoMesReferencia)
+    save_json_dados_todos_modelos(dadosModelo=dados, tipoVeiculo=tipoVeiculo, flgAmostra=False,
+                                  codigoMesReferencia=codigoMesReferencia)
+    print(f"Salvo os dados dos modelos do periodo {codigoMesReferencia}. Tipo de Veiculo: {tipoVeiculo.name}. Data: {datetime.datetime.now()}")
 
 if __name__ == '__main__':
 
@@ -359,6 +467,7 @@ if __name__ == '__main__':
     # print(f"Salva a lista de modelos: {datetime.now()}")
 
     # dados = get_amostra_dados_todos_modelos(tamanhoAmostra=tamanho_amostra, verbose=True)
+    """
     minCodigoMesReferencia = 250
     maxCodigoMesReferencia = 295
     tipoVeiculo = TipoVeiculoFipe.carro
@@ -371,6 +480,21 @@ if __name__ == '__main__':
                                              qtdAnosRetroativos=15, verbose=True)
         except:
             pass
+
+    
+    """
+
+
+    # save_json_todos_modelos(get_todos_modelos())
+    # print(f"Salva a lista de modelos: {datetime.now()}")
+    mes_referencia = 251
+    marcas_pendentes = [168, 170, 171, 177, 182, 183, 185, 186, 189, 190, 195, 199, 207, 208, 211, 214,
+                        236, 238, 240]
+
+    #for ano in anos_pendentes:
+    #save_todos_modelos_por_marca(TipoVeiculoFipe.carro, 15, 295, False)
+    for marca in marcas_pendentes:
+        save_modelos_por_marca(tipoVeiculo=TipoVeiculoFipe.carro, codigoMesReferencia=mes_referencia, codigoMarca=marca, qtdAnosRetroativos=15 )
 
 """
     frequency = 10000  # Set Frequency To 2500 Hertz
