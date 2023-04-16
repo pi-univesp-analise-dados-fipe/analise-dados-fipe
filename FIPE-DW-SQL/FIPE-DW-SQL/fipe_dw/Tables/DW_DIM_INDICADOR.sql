@@ -1,0 +1,25 @@
+﻿CREATE TABLE [fipe_dw].[DW_DIM_INDICADOR] (
+    [COD_INDICADOR]		TINYINT       NOT NULL,
+    [NME_INDICADOR]		VARCHAR(50)   NULL,
+	[SGL_INDICADOR]		VARCHAR(10)   NULL,
+    [DTA_INCLUSAO]		DATETIME2 (2) CONSTRAINT [DF_DW_DIM_INDICADOR] DEFAULT (getdate()) NULL,
+    [DTA_ATUALIZACAO]	DATETIME2 (2) NULL,
+    [FLG_ATIVO]			BIT           CONSTRAINT [DF_DW_DIM_INDICADOR_FLG_ATIVO] DEFAULT ((0)) NULL,
+    CONSTRAINT [PK_DW_DIM_indicador] PRIMARY KEY CLUSTERED ([COD_INDICADOR] ASC)
+);
+
+GO 
+
+/*
+-- dados de cadastro
+INSERT [fipe_dw].[DW_DIM_INDICADOR]
+	(
+		 COD_INDICADOR
+		,NME_INDICADOR
+		,SGL_INDICADOR
+	)
+values
+	(1, 'Índice Nacional de Preços ao Consumidor Amplo','IPCA'), 
+	(2, 'Índice Nacional de Preços ao Consumidor','INPC')
+	
+*/

@@ -15,8 +15,11 @@
     [DTA_INCLUSAO]        DATETIME2 (2) CONSTRAINT [DF_DIM_TEMPO_MENSAL_DTA_INCLUSAO] DEFAULT (getdate()) NULL,
     [DTA_ATUALIZACAO]     DATETIME2 (2) NULL,
     [FLG_ATIVO]           BIT           CONSTRAINT [DF_DIM_TEMPO_MENSAL_FLG_ATIVO] DEFAULT ((0)) NULL,
+    [NUM_ANO_MES]         AS            (CONVERT([int],concat([NUM_ANO],case when [NUM_MES]<(10) then concat('0',CONVERT([varchar](4),[NUM_MES])) else CONVERT([varchar](4),[NUM_MES]) end))),
     CONSTRAINT [PK_DW_DIM_TEMPO] PRIMARY KEY CLUSTERED ([COD_MES_REFERENCIA] ASC)
 );
+
+
 
 
 GO

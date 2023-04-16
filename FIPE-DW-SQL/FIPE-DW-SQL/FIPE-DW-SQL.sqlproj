@@ -63,6 +63,11 @@
     <Folder Include="fipe_dw\Views" />
     <Folder Include="Security\" />
     <Folder Include="fipe_dw\Stored Procedures" />
+    <Folder Include="fipe_stg\" />
+    <Folder Include="fipe_stg\Tables\" />
+    <Folder Include="fipe_ods\" />
+    <Folder Include="fipe_ods\Tables\" />
+    <Folder Include="fipe_ods\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\fipe_historico_precos.sql" />
@@ -94,5 +99,19 @@
     <Build Include="fipe_dw\Tables\DW_DIM_TIPO_VEICULO.sql" />
     <Build Include="fipe_dw\Stored Procedures\SP_UPDATE_FLG_ATIVO.sql" />
     <Build Include="Security\etl_user.sql" />
+    <Build Include="fipe_dw\Tables\DW_DIM_INDICADOR.sql" />
+    <Build Include="fipe_dw\Tables\DW_DIM_INDICADOR_ITEM.sql" />
+    <Build Include="fipe_stg\Tables\STG_UNIDADE_FEDERATIVA.sql" />
+    <Build Include="fipe_stg\Tables\STG_INDICADOR_SIDRA.sql" />
+    <Build Include="fipe_stg\Tables\STG_INDICADOR_SEGURANCA.sql" />
+    <Build Include="fipe_ods\Tables\ODS_UNIDADE_FEDERATIVA.sql" />
+    <Build Include="fipe_ods\Tables\ODS_REGIAO.sql" />
+    <Build Include="fipe_dw\Tables\DW_FTO_INDICE_PRECO.sql" />
+    <Build Include="fipe_dw\Tables\DW_FTO_CRIME_VEICULO.sql" />
+    <Build Include="fipe_dw\Tables\DW_DIM_REGIAO.sql" />
+    <Build Include="fipe_ods\Stored Procedures\SP_ODS_UNIDADE_FEDERATIVA.sql" />
+    <Build Include="fipe_dw\Stored Procedures\SP_DW_FTO_INDICE_PRECO.sql" />
+    <Build Include="fipe_dw\Stored Procedures\SP_DW_FTO_CRIME_VEICULO.sql" />
+    <Build Include="fipe_dw\Stored Procedures\SP_DW_DIM_REGIAO.sql" />
   </ItemGroup>
 </Project>
