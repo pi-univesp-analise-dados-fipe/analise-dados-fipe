@@ -27,7 +27,7 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"preCopyScript": "truncate table FIPE.STG_MES_REFERENCIA",
+						"preCopyScript": "truncate table FIPE_stg.STG_MES_REFERENCIA",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false,
 						"disableMetricsCollection": false
