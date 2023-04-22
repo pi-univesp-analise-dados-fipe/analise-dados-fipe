@@ -1,0 +1,12 @@
+{
+	"name": "DADOS ABERTOS",
+	"properties": {
+		"annotations": [],
+		"type": "HttpServer",
+		"typeProperties": {
+			"url": "http://dados.mj.gov.br",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}
