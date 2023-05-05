@@ -1,0 +1,17 @@
+{
+	"name": "XLS_SERIES_TEMPORAIS_ANFAVEA_V2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ANFAVEA",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": "docs/SeriesTemporais_Autoveiculos.xlsm"
+			}
+		}
+	}
+}
