@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "SeriesTemporais_Autoveiculos.xlsm",
+				"fileName": "SeriesTemporais_Autoveiculos.xls",
 				"folderPath": "dados/anfavea",
 				"container": "fipe-data"
 			}
