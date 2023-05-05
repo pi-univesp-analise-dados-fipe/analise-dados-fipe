@@ -5,6 +5,9 @@
 			"referenceName": "REST SIDRA",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "DB_STG"
+		},
 		"annotations": [],
 		"type": "RestResource",
 		"typeProperties": {
