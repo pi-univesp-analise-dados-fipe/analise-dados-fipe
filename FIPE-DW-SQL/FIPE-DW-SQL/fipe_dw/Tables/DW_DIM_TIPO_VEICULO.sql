@@ -1,11 +1,13 @@
 ﻿CREATE TABLE [fipe_dw].[DW_DIM_TIPO_VEICULO] (
     [COD_TIPO_VEICULO] TINYINT       NOT NULL,
-    [NME_TIPO_VEICULO] VARCHAR (8)   NULL,
+    [NME_TIPO_VEICULO] VARCHAR (20)  NULL,
     [DTA_INCLUSAO]     DATETIME2 (2) CONSTRAINT [DF_DW_DIM_TIPO_VEICULO_DTA_INCLUSAO] DEFAULT (getdate()) NULL,
     [DTA_ATUALIZACAO]  DATETIME2 (2) NULL,
     [FLG_ATIVO]        BIT           CONSTRAINT [DF_DW_DIM_TIPO_VEICULO_FLG_ATIVO] DEFAULT ((0)) NULL,
     CONSTRAINT [PK_DW_DIM_TIPO_VEICULO] PRIMARY KEY CLUSTERED ([COD_TIPO_VEICULO] ASC)
 );
+
+
 
 /*
 -- dados de cadastro
@@ -14,5 +16,7 @@ INSERT [fipe_dw].[DW_DIM_TIPO_VEICULO]
 values
 	(1, 'Carro'), 
 	(2, 'Moto'), 
-	(3, 'Caminhão')
+	(3, 'Caminhão'),
+    (4, 'Ônibus'),
+	(5, 'Comercial Leve')
 */

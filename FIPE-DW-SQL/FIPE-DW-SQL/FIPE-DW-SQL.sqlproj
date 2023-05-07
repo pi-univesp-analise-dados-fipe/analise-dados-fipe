@@ -113,5 +113,8 @@
     <Build Include="fipe_dw\Stored Procedures\SP_DW_FTO_INDICE_PRECO.sql" />
     <Build Include="fipe_dw\Stored Procedures\SP_DW_FTO_CRIME_VEICULO.sql" />
     <Build Include="fipe_dw\Stored Procedures\SP_DW_DIM_REGIAO.sql" />
+    <Build Include="fipe_stg\Tables\STG_INDICE_VEICULO.sql" />
+    <Build Include="fipe_dw\Tables\DW_FTO_INDICE_VEICULO.sql" />
+    <Build Include="fipe_dw\Stored Procedures\SP_DW_FTO_INDICE_VEICULO.sql" />
   </ItemGroup>
 </Project>
