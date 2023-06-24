@@ -1,0 +1,34 @@
+{
+	"name": "JSON_ANO_MODELO",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ABS_FIPE_DATA",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "JSON"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "ano_modelo.json",
+				"folderPath": "ano_modelo",
+				"container": "fipe-data"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"Label": {
+					"type": "string"
+				},
+				"Value": {
+					"type": "string"
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

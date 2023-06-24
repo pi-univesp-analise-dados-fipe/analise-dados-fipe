@@ -1,0 +1,61 @@
+{
+	"name": "JSON_DADOS_MODELO",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ABS_FIPE_DATA",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "JSON"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "dados_modelo.json",
+				"folderPath": "dados_modelo",
+				"container": "fipe-data"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"Valor": {
+					"type": "string"
+				},
+				"Marca": {
+					"type": "string"
+				},
+				"Modelo": {
+					"type": "string"
+				},
+				"AnoModelo": {
+					"type": "integer"
+				},
+				"Combustivel": {
+					"type": "string"
+				},
+				"CodigoFipe": {
+					"type": "string"
+				},
+				"MesReferencia": {
+					"type": "string"
+				},
+				"Autenticacao": {
+					"type": "string"
+				},
+				"TipoVeiculo": {
+					"type": "integer"
+				},
+				"SiglaCombustivel": {
+					"type": "string"
+				},
+				"DataConsulta": {
+					"type": "string"
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

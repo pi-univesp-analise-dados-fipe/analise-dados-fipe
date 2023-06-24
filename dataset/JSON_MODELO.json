@@ -1,0 +1,56 @@
+{
+	"name": "JSON_MODELO",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ABS_FIPE_DATA",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "JSON"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "modelo.json",
+				"folderPath": "modelo",
+				"container": "fipe-data"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"Modelos": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"Label": {
+								"type": "string"
+							},
+							"Value": {
+								"type": "integer"
+							}
+						}
+					}
+				},
+				"Anos": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"Label": {
+								"type": "string"
+							},
+							"Value": {
+								"type": "string"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
