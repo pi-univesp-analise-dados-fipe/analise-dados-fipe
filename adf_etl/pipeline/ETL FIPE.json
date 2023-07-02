@@ -1,0 +1,64 @@
+{
+	"name": "ETL FIPE",
+	"properties": {
+		"activities": [
+			{
+				"name": "ETL FIPE STG",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "ETL FIPE STG",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "ETL FIPE ODS",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "ETL FIPE STG",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "ETL FIPE ODS",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "ETL FIPE DW",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "ETL FIPE ODS",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "ETL FIPE DW",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"folder": {
+			"name": "ETL"
+		},
+		"annotations": []
+	}
+}

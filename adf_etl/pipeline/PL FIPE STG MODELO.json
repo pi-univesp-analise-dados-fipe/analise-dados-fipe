@@ -1,9 +1,9 @@
 {
-	"name": "PL FIPE STG MARCA",
+	"name": "PL FIPE STG MODELO",
 	"properties": {
 		"activities": [
 			{
-				"name": "STG MARCA",
+				"name": "STG MODELO",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -20,8 +20,8 @@
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": false,
-							"wildcardFolderPath": "dados/marca",
-							"wildcardFileName": "marcas_*.json",
+							"wildcardFolderPath": "dados/modelo",
+							"wildcardFileName": "modelos_*.json",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
@@ -30,7 +30,7 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"preCopyScript": "TRUNCATE TABLE fipe_stg.STG_MARCA",
+						"preCopyScript": "TRUNCATE TABLE fipe_stg.STG_MODELO",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false,
 						"disableMetricsCollection": false
@@ -41,19 +41,19 @@
 						"mappings": [
 							{
 								"source": {
-									"path": "$['codigoMarca']"
+									"path": "$['codigoModelo']"
 								},
 								"sink": {
-									"name": "COD_MARCA",
+									"name": "COD_MODELO",
 									"type": "Int32"
 								}
 							},
 							{
 								"source": {
-									"path": "$['nomeMarca']"
+									"path": "$['nomeModelo']"
 								},
 								"sink": {
-									"name": "NME_MARCA",
+									"name": "NME_MODELO",
 									"type": "String"
 								}
 							},
@@ -74,6 +74,15 @@
 									"name": "COD_MES_REFERENCIA",
 									"type": "Int32"
 								}
+							},
+							{
+								"source": {
+									"path": "$['codigoMarca']"
+								},
+								"sink": {
+									"name": "COD_MARCA",
+									"type": "Int32"
+								}
 							}
 						],
 						"collectionReference": ""
@@ -81,23 +90,23 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "JSON_MARCA_SRC",
+						"referenceName": "JSON_MODELO_SRC",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "ADS_FIPE_STG_MARCA",
+						"referenceName": "ADS_FIPE_STG_MODELO",
 						"type": "DatasetReference"
 					}
 				]
 			},
 			{
-				"name": "MOVE JSON MARCA REFERENCIA",
+				"name": "MOVE JSON MODELO REFERENCIA",
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "STG MARCA",
+						"activity": "STG MODELO",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -117,8 +126,8 @@
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": false,
-							"wildcardFolderPath": "dados/marca",
-							"wildcardFileName": "marcas_*.json",
+							"wildcardFolderPath": "dados/modelo",
+							"wildcardFileName": "modelos_*.json",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
@@ -139,23 +148,23 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "JSON_MARCA_SRC",
+						"referenceName": "JSON_MODELO_SRC",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "JSON_MARCA_ARQ",
+						"referenceName": "JSON_MODELO_ARQ",
 						"type": "DatasetReference"
 					}
 				]
 			},
 			{
-				"name": "DELETE JSON MARCA",
+				"name": "DELETE JSON MODELO SRC",
 				"type": "Delete",
 				"dependsOn": [
 					{
-						"activity": "MOVE JSON MARCA REFERENCIA",
+						"activity": "MOVE JSON MODELO REFERENCIA",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -171,7 +180,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "JSON_MARCA_SRC",
+						"referenceName": "JSON_MODELO_SRC",
 						"type": "DatasetReference"
 					},
 					"logStorageSettings": {
@@ -185,7 +194,7 @@
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
 						"recursive": false,
-						"wildcardFileName": "marcas_*.json",
+						"wildcardFileName": "modelos_*.json",
 						"enablePartitionDiscovery": false
 					}
 				}

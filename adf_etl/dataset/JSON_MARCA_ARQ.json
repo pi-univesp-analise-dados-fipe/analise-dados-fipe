@@ -1,0 +1,19 @@
+{
+	"name": "JSON_MARCA_ARQ",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ABS_FIPE_DATA",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "arquivo/marca",
+				"container": "fipe-data"
+			}
+		},
+		"schema": {}
+	}
+}

@@ -1,0 +1,57 @@
+{
+	"name": "Exec ADF pipeline via Rest API",
+	"properties": {
+		"activities": [
+			{
+				"name": "Calling ADF Pipeline",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@concat(\n        'https://management.azure.com/subscriptions/'\n        , variables('SubscriptionId')\n        , '/resourceGroups/'\n        , variables('resourceGroupName')\n        , '/providers/Microsoft.DataFactory/factories/'\n        , variables('factoryName')\n        ,'/pipelines/'\n        ,'Receiving_Param'\n        ,'/createRun?api-version=2018-06-01'\n)",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"body": {
+						"value": "@concat('{\"seconds\": ',variables('seconds'),'}')",
+						"type": "Expression"
+					},
+					"authentication": {
+						"type": "MSI",
+						"resource": "https://management.azure.com/"
+					}
+				}
+			}
+		],
+		"variables": {
+			"SubscriptionId": {
+				"type": "String",
+				"defaultValue": "2edd29f5-689f-48c5-b93e-93723216ea91"
+			},
+			"resourceGroupName": {
+				"type": "String",
+				"defaultValue": "studies"
+			},
+			"factoryName": {
+				"type": "String",
+				"defaultValue": "2609datafactory"
+			},
+			"seconds": {
+				"type": "String",
+				"defaultValue": "17"
+			}
+		},
+		"folder": {
+			"name": "TESTES"
+		},
+		"annotations": []
+	}
+}

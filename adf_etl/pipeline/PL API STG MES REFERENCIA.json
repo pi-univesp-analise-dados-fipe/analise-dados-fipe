@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "STG MES REFERENCIA",
+				"name": "API PARA STG MES REFERENCIA",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -27,7 +27,7 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"preCopyScript": "truncate table FIPE_stg.STG_MES_REFERENCIA",
+						"preCopyScript": "truncate table fipe_stg.STG_MES_REFERENCIA",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false,
 						"disableMetricsCollection": false
@@ -73,7 +73,7 @@
 			}
 		],
 		"folder": {
-			"name": "API FIPE"
+			"name": "API"
 		},
 		"annotations": []
 	}

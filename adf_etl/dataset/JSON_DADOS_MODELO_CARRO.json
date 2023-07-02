@@ -1,5 +1,5 @@
 {
-	"name": "JSON_HISTORICO_MODELO",
+	"name": "JSON_DADOS_MODELO_CARRO",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ABS_FIPE_DATA",
@@ -13,7 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "amostra_historico_modelos.json",
+				"fileName": "dados_modelo_carro.json",
 				"folderPath": "historico_modelo",
 				"container": "fipe-data"
 			}

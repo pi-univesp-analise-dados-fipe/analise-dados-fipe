@@ -1,0 +1,28 @@
+{
+	"name": "REST_CONSULTA_MARCA",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "FIPE API",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"codigoTipoVeiculo": {
+				"type": "string",
+				"defaultValue": "1"
+			},
+			"codigoTabelaReferencia": {
+				"type": "string",
+				"defaultValue": "1"
+			}
+		},
+		"folder": {
+			"name": "API FIPE"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": "ConsultarMarcas"
+		},
+		"schema": []
+	}
+}

@@ -1,12 +1,12 @@
 {
-	"name": "ADS_FIPE_STG_MARCA",
+	"name": "ADS_FIPE_STG_REFERENCIA",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ASD",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "DB_STG"
+			"name": "STG"
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
@@ -27,8 +27,8 @@
 			}
 		],
 		"typeProperties": {
-			"schema": "fipe_stg",
-			"table": "STG_MARCA"
+			"schema": "fipe",
+			"table": "STG_MES_REFERENCIA"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"

@@ -1,0 +1,18 @@
+{
+	"name": "REST_SIDRA_IPCA",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "REST SIDRA",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "DB_STG"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": "values/t/7060/n1/all/n7/all/v/all/p/all/c315/7169,7645,7647/d/v63%202,v66%204,v69%202,v2265%202"
+		},
+		"schema": []
+	}
+}

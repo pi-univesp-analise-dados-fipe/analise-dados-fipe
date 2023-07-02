@@ -1,0 +1,19 @@
+{
+	"name": "BNR_SERIES_TEMPORAIS_ANFAVEA",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ABS_FIPE_DATA",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "SeriesTemporais_Autoveiculos.xlsm",
+				"folderPath": "dados/anfavea",
+				"container": "fipe-data"
+			}
+		}
+	}
+}

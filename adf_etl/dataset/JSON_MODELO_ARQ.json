@@ -1,0 +1,19 @@
+{
+	"name": "JSON_MODELO_ARQ",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ABS_FIPE_DATA",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "arquivo/modelo",
+				"container": "fipe-data"
+			}
+		},
+		"schema": {}
+	}
+}

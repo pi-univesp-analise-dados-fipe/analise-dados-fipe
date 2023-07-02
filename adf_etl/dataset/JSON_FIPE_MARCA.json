@@ -1,0 +1,31 @@
+{
+	"name": "JSON_FIPE_MARCA",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "FIPE ORG CONSULTA MARCA",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "API FIPE"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": "ConsultarMarcas?codigoTipoVeiculo=1&codigoTabelaReferencia=295"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"Label": {
+					"type": "string"
+				},
+				"Value": {
+					"type": "string"
+				}
+			}
+		}
+	}
+}

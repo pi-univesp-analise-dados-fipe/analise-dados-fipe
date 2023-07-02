@@ -6,7 +6,7 @@
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "DB_STG"
+			"name": "STG"
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
@@ -27,7 +27,7 @@
 			}
 		],
 		"typeProperties": {
-			"schema": "fipe_stg",
+			"schema": "fipe",
 			"table": "STG_MARCA"
 		}
 	},

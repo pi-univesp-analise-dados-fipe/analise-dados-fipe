@@ -1,25 +1,24 @@
 {
-	"name": "DF_FIPE_STG_MARCA",
+	"name": "DF_FIPE_STG_MES_REFERENCIA",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "JSON_MARCA_SRC",
+						"referenceName": "JSON_MES_REFERENCIA",
 						"type": "DatasetReference"
 					},
-					"name": "jsonMarca"
+					"name": "jsonSrc"
 				}
 			],
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "ADS_FIPE_STG_MARCA",
+						"referenceName": "ADS_FIPE_STG_REFERENCIA",
 						"type": "DatasetReference"
 					},
-					"name": "fipeStgMarca",
-					"description": "Export data to ADS_FIPE_STG_MARCA",
+					"name": "fipeStgMesReferencia",
 					"rejectedDataLinkedService": {
 						"referenceName": "ABS_FIPE_DATA",
 						"type": "LinkedServiceReference"
@@ -33,14 +32,14 @@
 			],
 			"scriptLines": [
 				"source(output(",
-				"          Label as string,",
-				"          Value as string",
+				"          code as string,",
+				"          month as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
-				"     documentForm: 'documentPerLine') ~> jsonMarca",
-				"jsonMarca derive(DTA_INCLUSAO = currentTimestamp()) ~> dtaInclusao",
+				"     documentForm: 'documentPerLine') ~> jsonSrc",
+				"jsonSrc derive(DTA_INCLUSAO = currentTimestamp()) ~> dtaInclusao",
 				"dtaInclusao sink(allowSchemaDrift: false,",
 				"     validateSchema: true,",
 				"     input(",
@@ -53,16 +52,16 @@
 				"     updateable:false,",
 				"     upsertable:false,",
 				"     format: 'table',",
-				"     preSQLs:['TRUNCATE TABLE fipe.STG_MARCA'],",
+				"     preSQLs:['TRUNCATE TABLE fipe.STG_MES_REFERENCIA'],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     saveOrder: 1,",
 				"     errorHandlingOption: 'stopOnFirstError',",
 				"     mapColumn(",
 				"          DTA_INCLUSAO,",
-				"          COD_MES_REFERENCIA = Value,",
-				"          NME_MES_REFERENCIA = Label",
-				"     )) ~> fipeStgMarca"
+				"          COD_MES_REFERENCIA = code,",
+				"          NME_MES_REFERENCIA = month",
+				"     )) ~> fipeStgMesReferencia"
 			]
 		}
 	}

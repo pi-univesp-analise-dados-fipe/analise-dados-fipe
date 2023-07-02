@@ -1,0 +1,11 @@
+{
+	"name": "PL FIPE STG DADOS MODELO old",
+	"properties": {
+		"folder": {
+			"name": "old"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-03-28T16:27:06Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

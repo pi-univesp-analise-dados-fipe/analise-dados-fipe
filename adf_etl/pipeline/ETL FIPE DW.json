@@ -1,0 +1,111 @@
+{
+	"name": "ETL FIPE DW",
+	"properties": {
+		"activities": [
+			{
+				"name": "SP DW DIM MODELO",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[fipe_dw].[SP_DW_DIM_MODELO]"
+				},
+				"linkedServiceName": {
+					"referenceName": "ASD",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "SP DW FTO DADOS MODELO",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "SP DW DIM MODELO",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "SP DW DIM TEMPO MENSAL",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[fipe_dw].[SP_DW_FTO_DADOS_MODELO_STG]"
+				},
+				"linkedServiceName": {
+					"referenceName": "ASD",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "SP DW DIM TEMPO MENSAL",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[fipe_dw].[SP_DW_DIM_TEMPO_MENSAL]"
+				},
+				"linkedServiceName": {
+					"referenceName": "ASD",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "SP UPDATE FLG ATIVO",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "SP DW FTO DADOS MODELO",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[fipe_dw].[SP_UPDATE_FLG_ATIVO]"
+				},
+				"linkedServiceName": {
+					"referenceName": "ASD",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"folder": {
+			"name": "ETL"
+		},
+		"annotations": []
+	}
+}

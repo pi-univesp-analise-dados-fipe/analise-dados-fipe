@@ -6,7 +6,7 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "JSON_MARCA_SRC",
+						"referenceName": "JSON_MARCA",
 						"type": "DatasetReference"
 					},
 					"name": "jsonMarca"

@@ -1,0 +1,23 @@
+{
+	"name": "XLS_SERIES_TEMPORAIS_ANFAVEA",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ABS_FIPE_DATA",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "DB_STG"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "SeriesTemporais_Autoveiculos.xlsm",
+				"folderPath": "dados/anfavea",
+				"container": "fipe-data"
+			}
+		},
+		"schema": []
+	}
+}
