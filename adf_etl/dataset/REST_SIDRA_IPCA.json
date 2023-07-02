@@ -11,7 +11,7 @@
 		"annotations": [],
 		"type": "RestResource",
 		"typeProperties": {
-			"relativeUrl": "https://apisidra.ibge.gov.br/values/t/7060/n1/all/v/all/p/last%202/c315/7169,7645,7647/d/v63%202,v66%204,v69%202,v2265%202"
+			"relativeUrl": "https://apisidra.ibge.gov.br/values/t/7060/n1/all/v/all/p/202304/c315/7169,7645,7647/d/v63%202,v66%204,v69%202,v2265%202"
 		},
 		"schema": []
 	}
