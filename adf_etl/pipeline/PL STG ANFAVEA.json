@@ -1,9 +1,9 @@
 {
-	"name": "pipeline1",
+	"name": "PL STG ANFAVEA",
 	"properties": {
 		"activities": [
 			{
-				"name": "DOWNLOAD XLS SERIES TEMPORAIS ANFAVEA",
+				"name": "Copy data1",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -16,71 +16,126 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "BinarySource",
+						"type": "DelimitedTextSource",
 						"storeSettings": {
-							"type": "HttpReadSettings",
-							"requestMethod": "GET"
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": false,
+							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
-							"type": "BinaryReadSettings"
+							"type": "DelimitedTextReadSettings"
 						}
 					},
 					"sink": {
-						"type": "BinarySink",
-						"storeSettings": {
-							"type": "AzureBlobStorageWriteSettings"
-						}
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Prop_0",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "DSC_MES",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Unnamed: 0",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "QTD_LICENCIAMENTO",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Licenciamento Total",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "QTD_LICENCIAMENTO_NACIONAL",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Licenciamento Nacionais",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "QTD_LICENCIAMENTO_IMPORTADO",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Licenciamento Importados",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "QTD_PRODUCAO",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Produção",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "QTD_EXPORTACAO",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Exportação",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TPO_VEICULO",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
 				},
 				"inputs": [
 					{
-						"referenceName": "XLS_SERIES_TEMPORAIS_ANFAVEA_V2",
+						"referenceName": "ANFAVEA_csv",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "BNR_SERIES_TEMPORAIS_ANFAVEA",
-						"type": "DatasetReference"
-					}
-				]
-			},
-			{
-				"name": "Copy data1",
-				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
-				"dependsOn": [
-					{
-						"activity": "DOWNLOAD XLS SERIES TEMPORAIS ANFAVEA",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "ExcelSource",
-						"storeSettings": {
-							"type": "AzureBlobStorageReadSettings",
-							"recursive": true,
-							"enablePartitionDiscovery": false
-						}
-					},
-					"enableStaging": false
-				},
-				"inputs": [
-					{
-						"referenceName": "XLS_SERIES_TEMPORAIS_ANFAVEA",
+						"referenceName": "STG_INDICE_VEICULO",
 						"type": "DatasetReference"
 					}
 				]

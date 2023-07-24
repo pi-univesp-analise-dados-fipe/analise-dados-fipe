@@ -1,0 +1,50 @@
+{
+	"name": "STG_INDICE_VEICULO",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ASD",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "DSC_MES",
+				"type": "nvarchar"
+			},
+			{
+				"name": "QTD_LICENCIAMENTO",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "QTD_LICENCIAMENTO_NACIONAL",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "QTD_LICENCIAMENTO_IMPORTADO",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "QTD_PRODUCAO",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "QTD_EXPORTACAO",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TPO_VEICULO",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "fipe_stg",
+			"table": "STG_INDICE_VEICULO"
+		}
+	}
+}

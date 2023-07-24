@@ -1,0 +1,133 @@
+{
+	"name": "ANFAVEA_csv",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ABS_FIPE_DATA",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "SeriesTemporais_Autoveiculos.csv",
+				"folderPath": "dados/anfavea",
+				"container": "fipe-data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Prop_0",
+				"type": "String"
+			},
+			{
+				"name": "Unnamed: 0",
+				"type": "String"
+			},
+			{
+				"name": "Licenciamento Total",
+				"type": "String"
+			},
+			{
+				"name": "Licenciamento Nacionais",
+				"type": "String"
+			},
+			{
+				"name": "Licenciamento Importados",
+				"type": "String"
+			},
+			{
+				"name": "Produção",
+				"type": "String"
+			},
+			{
+				"name": "Exportação",
+				"type": "String"
+			},
+			{
+				"name": "Licenciamento Total.1",
+				"type": "String"
+			},
+			{
+				"name": "Licenciamento Nacionais.1",
+				"type": "String"
+			},
+			{
+				"name": "Licenciamento Importados.1",
+				"type": "String"
+			},
+			{
+				"name": "Produção.1",
+				"type": "String"
+			},
+			{
+				"name": "Exportação.1",
+				"type": "String"
+			},
+			{
+				"name": "Licenciamento Total.2",
+				"type": "String"
+			},
+			{
+				"name": "Licenciamento Nacionais.2",
+				"type": "String"
+			},
+			{
+				"name": "Licenciamento Importados.2",
+				"type": "String"
+			},
+			{
+				"name": "Produção.2",
+				"type": "String"
+			},
+			{
+				"name": "Exportação.2",
+				"type": "String"
+			},
+			{
+				"name": "Licenciamento Total.3",
+				"type": "String"
+			},
+			{
+				"name": "Licenciamento Nacionais.3",
+				"type": "String"
+			},
+			{
+				"name": "Licenciamento Importados.3",
+				"type": "String"
+			},
+			{
+				"name": "Produção.3",
+				"type": "String"
+			},
+			{
+				"name": "Exportação.3",
+				"type": "String"
+			},
+			{
+				"name": "Licenciamento Total.4",
+				"type": "String"
+			},
+			{
+				"name": "Licenciamento Nacionais.4",
+				"type": "String"
+			},
+			{
+				"name": "Licenciamento Importados.4",
+				"type": "String"
+			},
+			{
+				"name": "Produção.4",
+				"type": "String"
+			},
+			{
+				"name": "Exportação.4",
+				"type": "String"
+			}
+		]
+	}
+}
