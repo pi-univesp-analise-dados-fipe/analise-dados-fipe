@@ -1,0 +1,13 @@
+{
+	"name": "DTB FIPE",
+	"properties": {
+		"annotations": [],
+		"type": "AzureDatabricks",
+		"typeProperties": {
+			"domain": "https://adb-3235495255664172.12.azuredatabricks.net",
+			"authentication": "MSI",
+			"workspaceResourceId": "/subscriptions/d3acab56-083f-441b-bc73-060fad7b302d/resourceGroups/pi-analise-dados-fipe/providers/Microsoft.Databricks/workspaces/dtb_analise_dados_fipe",
+			"existingClusterId": "0723-220812-k11f5v7f"
+		}
+	}
+}
