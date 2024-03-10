@@ -549,3 +549,5 @@ FIPE-DW-SQL/FIPE-DW-SQL/obj/Debug/FIPE_DW_SQL.pdb
 *.pdb
 *.dll
 FIPE-DW-SQL/FIPE-DW-SQL/obj/Debug/FIPE-DW-SQL.sqlproj.FileListAbsolute.txt
+*.dll
+*.pdb
