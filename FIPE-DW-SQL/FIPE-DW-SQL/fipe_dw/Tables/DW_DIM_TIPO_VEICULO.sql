@@ -12,7 +12,7 @@
 /*
 -- dados de cadastro
 INSERT [fipe_dw].[DW_DIM_TIPO_VEICULO] 
-	([COD_TIPO_MODELO], [NME_TIPO_MODELO])
+	([COD_TIPO_VEICULO], [NME_TIPO_VEICULO])
 values
 	(1, 'Carro'), 
 	(2, 'Moto'), 

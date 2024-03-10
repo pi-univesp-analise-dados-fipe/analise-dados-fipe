@@ -7,3 +7,13 @@ E:\source\analise-dados-fipe\FIPE-DW-SQL\FIPE-DW-SQL\obj\Debug\FIPE_DW_SQL.dll
 E:\source\analise-dados-fipe\FIPE-DW-SQL\FIPE-DW-SQL\obj\Debug\FIPE_DW_SQL.pdb
 E:\source\analise-dados-fipe\FIPE-DW-SQL\FIPE-DW-SQL\bin\Debug\FIPE_DW_SQL.dll
 E:\source\analise-dados-fipe\FIPE-DW-SQL\FIPE-DW-SQL\bin\Debug\FIPE_DW_SQL.pdb
+C:\source\analise-dados-fipe\FIPE-DW-SQL\FIPE-DW-SQL\bin\Debug\FIPE-DW-SQL.dacpac
+C:\source\analise-dados-fipe\FIPE-DW-SQL\FIPE-DW-SQL\bin\Debug\FIPE_DW_SQL.dll
+C:\source\analise-dados-fipe\FIPE-DW-SQL\FIPE-DW-SQL\bin\Debug\FIPE_DW_SQL.pdb
+C:\source\analise-dados-fipe\FIPE-DW-SQL\FIPE-DW-SQL\obj\Debug\FIPE-DW-SQL.sqlproj.AssemblyReference.cache
+C:\source\analise-dados-fipe\FIPE-DW-SQL\FIPE-DW-SQL\obj\Debug\Model.xml
+C:\source\analise-dados-fipe\FIPE-DW-SQL\FIPE-DW-SQL\obj\Debug\refactor.xml
+C:\source\analise-dados-fipe\FIPE-DW-SQL\FIPE-DW-SQL\obj\Debug\postdeploy.sql
+C:\source\analise-dados-fipe\FIPE-DW-SQL\FIPE-DW-SQL\obj\Debug\predeploy.sql
+C:\source\analise-dados-fipe\FIPE-DW-SQL\FIPE-DW-SQL\obj\Debug\FIPE_DW_SQL.dll
+C:\source\analise-dados-fipe\FIPE-DW-SQL\FIPE-DW-SQL\obj\Debug\FIPE_DW_SQL.pdb

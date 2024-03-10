@@ -16,12 +16,13 @@
     <ModelCollation>1033, CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <TargetLanguage>CS</TargetLanguage>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <SqlServerVerification>False</SqlServerVerification>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -79,8 +80,6 @@
     <Build Include="fipe_dw\Tables\STG_MARCA.sql" />
     <Build Include="fipe_dw\Tables\STG_MES_REFERENCIA.sql" />
     <Build Include="fipe_dw\Tables\STG_MODELO.sql" />
-    <Build Include="Security\dev_user.sql" />
-    <Build Include="Security\RoleMemberships.sql" />
     <Build Include="Security\fipe.sql" />
     <Build Include="fipe_dw\Stored Procedures\SP_ODS_MARCA.sql" />
     <Build Include="fipe_dw\Stored Procedures\SP_ODS_MODELO.sql" />
@@ -98,7 +97,6 @@
     <Build Include="fipe_dw\Stored Procedures\SP_DW_FTO_DADOS_MODELO.sql" />
     <Build Include="fipe_dw\Tables\DW_DIM_TIPO_VEICULO.sql" />
     <Build Include="fipe_dw\Stored Procedures\SP_UPDATE_FLG_ATIVO.sql" />
-    <Build Include="Security\etl_user.sql" />
     <Build Include="fipe_dw\Tables\DW_DIM_INDICADOR.sql" />
     <Build Include="fipe_dw\Tables\DW_DIM_INDICADOR_ITEM.sql" />
     <Build Include="fipe_stg\Tables\STG_UNIDADE_FEDERATIVA.sql" />
@@ -116,5 +114,7 @@
     <Build Include="fipe_stg\Tables\STG_INDICE_VEICULO.sql" />
     <Build Include="fipe_dw\Tables\DW_FTO_INDICE_VEICULO.sql" />
     <Build Include="fipe_dw\Stored Procedures\SP_DW_FTO_INDICE_VEICULO.sql" />
+    <Build Include="fipe_ods\Stored Procedures\SP_ODS_CONTROLE.sql" />
+    <Build Include="fipe_dw\Stored Procedures\SP_DW_CONTROLE.sql" />
   </ItemGroup>
 </Project>

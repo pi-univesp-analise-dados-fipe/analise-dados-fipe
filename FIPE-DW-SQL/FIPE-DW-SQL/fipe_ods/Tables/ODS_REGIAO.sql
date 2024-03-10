@@ -6,3 +6,18 @@
     CONSTRAINT [PK_ODS_REGIAO_UF] PRIMARY KEY CLUSTERED ([COD_REGIAO] ASC)
 );
 
+/*
+insert into fipe_ods.ODS_REGIAO
+(
+COD_REGIAO
+, NME_REGIAO
+, SGL_REGIAO
+, DTA_INCLUSAO
+)
+values
+ (1, 'Norte'		, 'N'	, GETDATE())
+, (2, 'Nordeste'	, 'NE'	, GETDATE())
+, (3, 'Sudeste'		, 'SE'	, GETDATE())
+, (4, 'Sul'			, 'S'	, GETDATE())
+, (5, 'Centro-Oeste', 'CE'	, GETDATE())
+*/

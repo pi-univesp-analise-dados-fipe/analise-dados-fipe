@@ -1,0 +1,16 @@
+﻿
+CREATE  PROCEDURE FIPE_DW.SP_DW_CONTROLE
+AS
+BEGIN
+	-- DIMENSOES
+	EXEC [fipe_dw].[SP_DW_DIM_TEMPO_MENSAL]
+	EXEC [fipe_dw].[SP_DW_DIM_MODELO]
+	EXEC [fipe_dw].[SP_DW_DIM_REGIAO]
+	-- FATOS
+	exec [fipe_dw].[SP_DW_FTO_CRIME_VEICULO]
+	   
+	exec [fipe_dw].[SP_DW_FTO_DADOS_MODELO]
+	exec [fipe_dw].[SP_DW_FTO_INDICE_VEICULO]
+	exec [fipe_dw].[SP_DW_FTO_INDICE_PRECO]
+	
+END
